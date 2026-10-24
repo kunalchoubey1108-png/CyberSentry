@@ -1,0 +1,53 @@
+[project]
+name = "cybersentry-ai"
+version = "0.1.0"
+description = "Evidence-first security incident triage copilot"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "python-multipart>=0.0.9",
+    "uvicorn[standard]>=0.30",
+    "pandas>=2.2",
+    "pydantic>=2.7",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
+# Advisory NLP classifier (eval/nlp_experiment.py + app/nlp/classify.py).
+# Optional: without it the /classify route answers available=false and
+# nothing else in the pipeline is affected.
+nlp = [
+    "scikit-learn>=1.5",
+    "torch>=2.4",
+    "transformers>=4.40",
+    "huggingface-hub>=0.24",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["app", "app.rules", "app.llm", "app.nlp"]
+
+[tool.mypy]
+python_version = "3.11"
+
+[[tool.mypy.overrides]]
+# PyYAML ships no type stubs; the import is real, only the stubs are absent.
+module = "yaml"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# Optional NLP stack (app/nlp/classify.py) — real imports, no bundled stubs.
+module = ["sklearn", "sklearn.*", "torch", "transformers"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

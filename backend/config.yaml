@@ -1,0 +1,52 @@
+# CyberSentry AI — rule thresholds and scoring weights.
+# Deterministic detection reads these values; the LLM never overrides them.
+
+rules:
+  failed_login:
+    threshold: 5          # failures within window before alert
+    window_seconds: 300
+  brute_force:
+    threshold: 20
+    window_seconds: 600
+  unusual_hour:
+    # Alerts when an event falls outside [start, end) UTC.
+    start_hour: 8
+    end_hour: 20
+  sensitive_file_access:
+    threshold: 3
+    window_seconds: 3600
+
+  # R1-R4 (backend/app/rules) — the implemented detection rule set.
+  r1_failed_login_burst:
+    failure_threshold: 5
+    failure_window_seconds: 600    # 5+ failures within 10 min
+    success_window_seconds: 900    # then a success within 15 min of the burst
+    severity: 8
+  r2_suspicious_privilege:
+    window_seconds: 1800           # privileged event within 30 min of the login
+    severity: 9
+  r3_password_spray:
+    distinct_user_threshold: 5
+    window_seconds: 600            # 5+ distinct users failing within 10 min
+    severity: 7
+  r4_offhours_elevated:
+    start_hour: 8                  # business hours [start, end) UTC
+    end_hour: 20
+    min_criticality: 4
+    severity: 6
+
+scoring:
+  # Weights summed into a 0-100 risk score per incident.
+  base: 10
+  weights:
+    failed_login: 15
+    brute_force: 30
+    unusual_hour: 10
+    sensitive_file_access: 25
+  max_score: 100
+
+correlation:
+  window_seconds: 1800    # events within this gap merge into one incident
+  match_keys:
+    - source_ip
+    - user

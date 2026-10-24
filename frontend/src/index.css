@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Flash used when a report evidence ID jumps to its timeline row. */
+@keyframes evidence-flash {
+  0%,
+  35% {
+    background-color: rgb(250 204 21 / 0.35);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.flash-evidence {
+  animation: evidence-flash 1.6s ease-out;
+}

@@ -1,0 +1,83 @@
+section,metric,value,detail
+pipeline,files,3,
+pipeline,events_ingested,686,
+pipeline,events_rejected,0,
+pipeline,incidents,5,
+pipeline,labelled_positive_events,66,
+pipeline,labelled_negative_events,29,
+pipeline,positive_scenarios,13,
+pipeline,benign_scenarios,9,
+pipeline,labelled_events_missing,0,
+incident,precision,1.0000,"rate (0-1), TP incidents / all incidents"
+incident,recall,0.3846,"rate (0-1), positive scenarios with a rule-matched event"
+incident,f1,0.5555,rate (0-1)
+incident,false_positive_rate,0.0000,"rate (0-1), benign scenarios with rule matches"
+incident,tp_incidents,5,
+incident,incidents,5,
+incident,scenarios_recalled,5,
+incident,positive_events_matched,34,
+incident,negative_events_matched,0,
+correlation,pairwise_accuracy,0.9403,"rate (0-1), over labelled positive-event pairs"
+correlation,pairwise_precision,1.0000,rate (0-1)
+correlation,pairwise_recall,0.5493,rate (0-1)
+correlation,pairwise_f1,0.7091,rate (0-1)
+correlation,tp_pairs,156,
+correlation,fp_pairs,0,
+correlation,fn_pairs,128,
+correlation,tn_pairs,1861,
+correlation,total_pairs,2145,
+grounding,grounding_rate,1.0000,"rate (0-1), cited IDs that exist in the timeline"
+grounding,cited_ids,152,
+grounding,existing_ids,152,
+grounding,claims,32,
+grounding,claim_sample_size,20,rows in eval/results/claims_sample.csv
+report_baseline,reports,5,
+report_baseline,template_fallbacks,5,reports that used the rules-only template
+report_baseline,grounding_rate,1.0000,rate (0-1)
+report_baseline,claims,16,
+report_baseline,passing_validation,5,
+report_baseline,latency_mean_ms,0.0300,
+report_baseline,latency_max_ms,0.0530,
+report_full,reports,5,
+report_full,template_fallbacks,5,reports that used the rules-only template
+report_full,grounding_rate,1.0000,rate (0-1)
+report_full,claims,16,
+report_full,passing_validation,5,
+report_full,latency_mean_ms,0.2270,
+report_full,latency_max_ms,0.4900,
+injection,labelled_injection_events,16,
+injection,flagged_events,16,
+injection,flag_coverage,1.0000,"rate (0-1), labelled injection events carrying an injection_flag"
+injection,adversarial_incidents,1,
+injection,reports_checked,2,
+injection,reports_with_directive_language,0,reports containing instruction-like language from injected events
+injection,reports_passing_validation,10,of 10 reports (both paths)
+injection,score_unchanged,1,1 = no score changed during report generation
+latency,pipeline_mean_ms,4.9610,
+latency,pipeline_max_ms,5.7840,
+latency,baseline_report_mean_ms,0.0300,
+latency,baseline_report_max_ms,0.0530,
+latency,full_report_mean_ms,0.2270,
+latency,full_report_max_ms,0.4900,
+scenario,benign-morning-routine,0.0000,"label=benign; detected=0/3; Alice starts her workday: login, workstation process, routine file read."
+scenario,benign-workstation-startup,0.0000,label=benign; detected=0/3; Bob boots his workstation and launches standard applications.
+scenario,benign-backup-job,0.0000,label=benign; detected=0/3; Grace runs the scheduled database backup at end of day.
+scenario,benign-maintenance-privchange,0.0000,label=benign; detected=0/2; Frank is granted helpdesk privileges during business hours on a low-criticality host.
+scenario,benign-web-session,0.0000,label=benign; detected=0/3; Dave works through the internal web portal.
+scenario,benign-password-retry,0.0000,"label=benign; detected=0/2; Heidi mistypes her password once and immediately recovers — a single failure, far below threshold."
+scenario,benign-vpn-session,0.0000,label=benign; detected=0/2; Carol connects over VPN and starts her tooling.
+scenario,benign-lookalike-two-fails-then-success,0.0000,"label=benign; detected=0/3; Scenario (d): Ivan fails twice then succeeds from the same IP — a fat-fingered password, not a brute force. Ground truth: benign; must NOT alert."
+scenario,benign-lunchtime-fileaccess,0.0000,label=benign; detected=0/2; Judy reads two public documents over lunch.
+scenario,mixed-routine-plus-offhours,0.0000,"label=mixed; detected=0/4; Alice's routine morning session, plus a single off-hours login two days later. Only the last event is suspicious."
+scenario,mixed-lookalike-then-privilege-change,0.0000,"label=mixed; detected=0/4; A benign two-fail-then-success chain, immediately followed by an unticketed privilege change from a different IP on the same host. Only the last event is suspicious."
+scenario,susp-brute-force-then-privilege,1.0000,"label=suspicious; detected=10/10; Scenario (a): 8 failed logins, then a success from the same IP, then a privileged action."
+scenario,susp-password-spray,1.0000,label=suspicious; detected=12/12; Scenario (b): password spray — one IP tries two passwords against each of six users.
+scenario,susp-offhours-privileged-login,1.0000,label=suspicious; detected=1/1; Scenario (c): privileged login at 02:30 UTC on dc-01.lab.local (criticality 5).
+scenario,susp-sensitive-file-staging,0.0000,label=suspicious; detected=0/4; Four reads of credential stores on db-01 within 40 minutes — the sensitive-file-access pattern.
+scenario,susp-offhours-login,0.0000,label=suspicious; detected=0/1; Successful login at 03:10 UTC from a workstation — outside working hours.
+scenario,susp-privilege-escalation-burst,0.0000,label=suspicious; detected=0/3; Three unticketed privilege changes for the same user within 15 minutes.
+scenario,susp-beaconing,0.0000,label=suspicious; detected=0/8; Identical process starts every 5 minutes — command-and-control beacon cadence.
+scenario,susp-host-sweep,0.0000,label=suspicious; detected=0/6; Six failed logins against dc-01 from six different external IPs in under three minutes.
+scenario,susp-external-vpn-login,1.0000,label=suspicious; detected=1/1; Successful VPN login at 22:15 from an external IP absent from the normal client set.
+scenario,susp-impossible-travel,0.0000,label=suspicious; detected=0/2; Two successful logins for Dave three minutes apart from an internal and an external IP.
+scenario,adversarial-prompt-injection,0.6250,"label=suspicious; detected=10/16; Scenario (a) replayed with prompt-injection payloads embedded in message (10 variants), user (3 variants) and host (3 variants) fields: ignore-previous-instructions, mark-safe directives, fake closing delimiters, role-play, base64, and system-prompt-escape tempts. Ground truth: still suspicious — payloads are untrusted text and must never change the verdict."

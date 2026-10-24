@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "source": {
+    "labels": "data/labelled/labels.json",
+    "seed": 20240601
+  },
+  "totals": {
+    "events": 375,
+    "labelled_positive": 72,
+    "labelled_negative": 23,
+    "matched": 34,
+    "tp": 34,
+    "fp": 0,
+    "fn": 38,
+    "tn": 303,
+    "precision": 1.0,
+    "recall": 0.4722,
+    "f1": 0.6415,
+    "missing_labels": []
+  },
+  "scenarios": [
+    {
+      "id": "benign-morning-routine",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Alice starts her workday: login, workstation process, routine file read.",
+      "events": 3,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-workstation-startup",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Bob boots his workstation and launches standard applications.",
+      "events": 3,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-backup-job",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Grace runs the scheduled database backup at end of day.",
+      "events": 3,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-maintenance-privchange",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Frank is granted helpdesk privileges during business hours on a low-criticality host.",
+      "events": 2,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-web-session",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Dave works through the internal web portal.",
+      "events": 3,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-password-retry",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Heidi mistypes her password once and immediately recovers \u2014 a single failure, far below threshold.",
+      "events": 2,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-vpn-session",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Carol connects over VPN and starts her tooling.",
+      "events": 2,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-lookalike-two-fails-then-success",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Scenario (d): Ivan fails twice then succeeds from the same IP \u2014 a fat-fingered password, not a brute force. Ground truth: benign; must NOT alert.",
+      "events": 3,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "benign-lunchtime-fileaccess",
+      "label": "benign",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Judy reads two public documents over lunch.",
+      "events": 2,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "mixed-routine-plus-offhours",
+      "label": "mixed",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "Alice's routine morning session, plus a single off-hours login two days later. Only the last event is suspicious.",
+      "events": 4,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "mixed-lookalike-then-privilege-change",
+      "label": "mixed",
+      "files": [
+        "sample_benign.csv",
+        "sample_attacks.csv"
+      ],
+      "description": "A benign two-fail-then-success chain, immediately followed by an unticketed privilege change from a different IP on the same host. Only the last event is suspicious.",
+      "events": 4,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "susp-brute-force-then-privilege",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Scenario (a): 8 failed logins, then a success from the same IP, then a privileged action.",
+      "events": 10,
+      "detected": 10,
+      "recall": 1.0
+    },
+    {
+      "id": "susp-password-spray",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Scenario (b): password spray \u2014 one IP tries two passwords against each of six users.",
+      "events": 12,
+      "detected": 12,
+      "recall": 1.0
+    },
+    {
+      "id": "susp-offhours-privileged-login",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Scenario (c): privileged login at 02:30 UTC on dc-01.lab.local (criticality 5).",
+      "events": 1,
+      "detected": 1,
+      "recall": 1.0
+    },
+    {
+      "id": "susp-sensitive-file-staging",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Four reads of credential stores on db-01 within 40 minutes \u2014 the sensitive-file-access pattern.",
+      "events": 4,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "susp-offhours-login",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Successful login at 03:10 UTC from a workstation \u2014 outside working hours.",
+      "events": 1,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "susp-privilege-escalation-burst",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Three unticketed privilege changes for the same user within 15 minutes.",
+      "events": 3,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "susp-beaconing",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Identical process starts every 5 minutes \u2014 command-and-control beacon cadence.",
+      "events": 8,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "susp-host-sweep",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Six failed logins against dc-01 from six different external IPs in under three minutes.",
+      "events": 6,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "susp-external-vpn-login",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Successful VPN login at 22:15 from an external IP absent from the normal client set.",
+      "events": 1,
+      "detected": 1,
+      "recall": 1.0
+    },
+    {
+      "id": "susp-impossible-travel",
+      "label": "suspicious",
+      "files": [
+        "sample_attacks.csv"
+      ],
+      "description": "Two successful logins for Dave three minutes apart from an internal and an external IP.",
+      "events": 2,
+      "detected": 0,
+      "recall": 0.0
+    },
+    {
+      "id": "adversarial-prompt-injection",
+      "label": "suspicious",
+      "files": [
+        "adversarial_injection.csv"
+      ],
+      "description": "Scenario (a) replayed with prompt-injection payloads embedded in message (10 variants), user (3 variants) and host (3 variants) fields: ignore-previous-instructions, mark-safe directives, fake closing delimiters, role-play, base64, and system-prompt-escape tempts. Ground truth: still suspicious \u2014 payloads are untrusted text and must never change the verdict.",
+      "events": 16,
+      "detected": 10,
+      "recall": 0.625
+    }
+  ],
+  "runs": [
+    {
+      "file": "adversarial_injection.csv",
+      "events": 16,
+      "rejected": 0,
+      "matched": 10,
+      "incidents": 1,
+      "max_score": 84
+    },
+    {
+      "file": "sample_attacks.csv",
+      "events": 359,
+      "rejected": 0,
+      "matched": 24,
+      "incidents": 4,
+      "max_score": 79
+    },
+    {
+      "file": "sample_benign.csv",
+      "events": 311,
+      "rejected": 0,
+      "matched": 0,
+      "incidents": 0,
+      "max_score": 0
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+message,label,source
+"brute force attempt: 24 failed logins for alice from 10.0.0.5",credential_access,handwritten
+"password spray detected from 203.0.113.7 across 12 accounts",credential_access,handwritten
+"credential stuffing payload replayed against login portal",credential_access,handwritten
+"failed login for erin: 9 attempts within 60 seconds",credential_access,handwritten
+"kerberos brute force against krbtgt generated lockouts",credential_access,handwritten
+"user account locked after repeated wrong passwords",credential_access,handwritten
+"spray of common passwords against vpn gateway",credential_access,handwritten
+"rainbow table crack of dumped ntds.dit hashes succeeded",credential_access,handwritten
+"lsass memory read by unknown process (credential dump)",credential_access,handwritten
+"mimikatz-style sekurlsa logonpasswords invocation observed",credential_access,handwritten
+"hashdump of local sam database completed",credential_access,handwritten
+"stolen session cookie replayed from new device",credential_access,handwritten
+"golden ticket forged from compromised krbtgt hash",credential_access,handwritten
+"credential grep over /etc/shadow output piped to netcat",credential_access,handwritten
+"wordlist attack on ssh service from 198.51.100.9",credential_access,handwritten
+"online password guessing against mail portal endpoint",credential_access,handwritten
+"brute forcing service account with online cracking tool",credential_access,handwritten
+"password reset token intercepted and reused",credential_access,handwritten
+"credential pair spraying mail flux pattern observed",credential_access,handwritten
+"read of id_rsa private key by non-owner account",credential_access,handwritten
+"credentials exposed in world-readable /etc/passwd-backup",credential_access,handwritten
+"service account password guessed 50 times in one minute",credential_access,handwritten
+"failed gssapi authentication burst from single host",credential_access,handwritten
+"credential brute force ended with successful logon",credential_access,handwritten
+"account enumeration via timing on failed logins",credential_access,handwritten
+"dump of browser saved passwords archive detected",credential_access,handwritten
+"keylogger capture uploaded stolen credential set to remote host",credential_access,handwritten
+"ntlm relay attempt captured challenge response",credential_access,handwritten
+"asrep roastable account requested without preauth",credential_access,handwritten
+"kerberoasting requested service tickets for service principal names",credential_access,handwritten
+"offline crack confirmed weak password for backup service account",credential_access,handwritten
+"repeated invalid pin entries for admin smartcard",credential_access,handwritten
+"credential guess loop targeted database service account",credential_access,handwritten
+"password guessed after several attempts on jump host",credential_access,handwritten
+"vault token bruteforced by rotating client secrets",credential_access,handwritten
+"authentication failed during horizontal sweep",credential_access,fixture
+"authentication failed: expired password prompt shown",credential_access,fixture
+"authentication failed: incorrect password (attempt 1 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 2 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 3 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 4 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 5 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 6 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 7 of 3)",credential_access,fixture
+"authentication failed: incorrect password (attempt 8 of 3)",credential_access,fixture
+"authentication failed: password spray pattern (attempt 1)",credential_access,fixture
+"authentication failed: password spray pattern (attempt 2)",credential_access,fixture
+"read credential store /etc/gshadow",credential_access,fixture
+"read credential store /etc/shadow",credential_access,fixture
+"read private key /etc/ssl/private/service.key",credential_access,fixture
+"user session established after repeated failures",credential_access,fixture
+"powershell -enc bypass execution policy spawned cmd.exe",execution,handwritten
+"cmd.exe /c whoami executed from document macro",execution,handwritten
+"wmic process call create powershell payload",execution,handwritten
+"rundll32.exe invoked with javascript protocol handler",execution,handwritten
+"regsvr32 scrofil.dll execution bypassed applocker",execution,handwritten
+"mshta.exe executed remote html application",execution,handwritten
+"macro spawned wscript.exe from invoice document",execution,handwritten
+"encoded powershell command decoded and run in memory",execution,handwritten
+"python reverse shell connected to internal host port 4444",execution,handwritten
+"bash reverse shell spawned by web server",execution,handwritten
+"curl piped to bash downloaded second stage",execution,handwritten
+"wget fetched payload and marked it executable",execution,handwritten
+"scheduled task created to run implant at logon",execution,handwritten
+"crontab entry added for persistence binary",execution,handwritten
+"systemd timer executed unknown service unit",execution,handwritten
+"base64 payload decoded and executed from tmpfs",execution,handwritten
+"certutil urlcache download of backdoor executable",execution,handwritten
+"bitsadmin transfer spawned background transfer job",execution,handwritten
+"ie runtime launch of embedded payload in pdf",execution,handwritten
+"office application spawned child process powershell",execution,handwritten
+"vba macro executed shell command on document open",execution,handwritten
+"dll side-loading launched explorer lookalike process",execution,handwritten
+"process injection into lsass via remote thread",execution,handwritten
+"shellcode mapped executable in process heap",execution,handwritten
+"unknown binary executed from temp directory",execution,handwritten
+"node process spawned tcp listener on port 8081",execution,handwritten
+"ruby script executed obfuscated payload",execution,handwritten
+"perl one-liner executed reverse connect",execution,handwritten
+"in-memory implant compiled and launched without disk write",execution,handwritten
+"reflective dll loaded into running process",execution,handwritten
+"cscript executed obfuscated vbe script",execution,handwritten
+"msiexec executed quiet install of unsigned package",execution,handwritten
+"installer ran preinstall script as session user",execution,handwritten
+"container started with privileged host mounts",execution,handwritten
+"logon script downloaded and executed remote powershell",execution,handwritten
+"beacon process started every 300 seconds",execution,handwritten
+"suspicious parent child chain: winword spawned powershell",execution,handwritten
+"unusual command line: powershell hidden window -nop -w hidden",execution,handwritten
+"scheduled backup job started",execution,fixture
+"scheduled task executed: inventory scan",execution,fixture
+"started updater.exe with fixed 300s interval",execution,fixture
+"started remote desktop gateway",execution,fixture
+"user added to domain admins group without change ticket",privilege_escalation,handwritten
+"sudoers entry granted nopasswd all to service account",privilege_escalation,handwritten
+"privilege escalation via unquoted service path",privilege_escalation,handwritten
+"service binary replaced with reverse shell loader",privilege_escalation,handwritten
+"token impersonation of elevated system process",privilege_escalation,handwritten
+"seDebugPrivilege enabled for standard user",privilege_escalation,handwritten
+"runas spawned elevated administrator shell",privilege_escalation,handwritten
+"uac bypass launched elevated explorer process",privilege_escalation,handwritten
+"added to remote desktop users group with no ticket",privilege_escalation,handwritten
+"new group policy linked to grant admin rights",privilege_escalation,handwritten
+"shadow copy created to bypass permission checks",privilege_escalation,handwritten
+"takeown and icacls granted full control of system directory",privilege_escalation,handwritten
+"potato exploit invoked for system escalation",privilege_escalation,handwritten
+"named pipe impersonation achieved admin context",privilege_escalation,handwritten
+"kernel driver loaded disabling endpoint protections",privilege_escalation,handwritten
+"audit policy changed to disable logon auditing",privilege_escalation,handwritten
+"scheduled task created with highest run level by user",privilege_escalation,handwritten
+"root ssh key added to authorized keys",privilege_escalation,handwritten
+"setuid binary planted in local bin",privilege_escalation,handwritten
+"cron job added running as root from web directory",privilege_escalation,handwritten
+"group policy preference added local administrator password",privilege_escalation,handwritten
+"defender disabled via elevated registry add",privilege_escalation,handwritten
+"account added to enterprise administrators",privilege_escalation,handwritten
+"privileged session opened outside any change window",privilege_escalation,handwritten
+"docker socket mounted giving root on host",privilege_escalation,handwritten
+"kubernetes service account bound to cluster-admin role",privilege_escalation,handwritten
+"helpdesk member reset domain admin password",privilege_escalation,handwritten
+"temporary domain admin granted and never revoked",privilege_escalation,handwritten
+"privilege change applied without approver signature",privilege_escalation,handwritten
+"power users group membership added by script",privilege_escalation,handwritten
+"local administrators group gained new member sync service",privilege_escalation,handwritten
+"backup operators used to restore over system files",privilege_escalation,handwritten
+"remote elevation via admin endpoint returned higher token",privilege_escalation,handwritten
+"privileged interactive logon on domain controller outside working hours",privilege_escalation,fixture
+"added to backup operators group, no change ticket",privilege_escalation,fixture
+"added to local administrators group, no change ticket",privilege_escalation,fixture
+"added to power users group, no change ticket",privilege_escalation,fixture
+"started office suite",benign,handwritten
+"started browser",benign,fixture
+"started email client",benign,fixture
+"started code editor",benign,fixture
+"started database client",benign,fixture
+"scheduled backup job completed successfully",benign,handwritten
+"antivirus definitions updated",benign,handwritten
+"user logged in from managed laptop",benign,handwritten
+"email delivered to mailbox",benign,handwritten
+"calendar invite accepted for weekly sync",benign,handwritten
+"file synchronized to cloud drive",benign,handwritten
+"password changed by user via self service reset",benign,handwritten
+"mfa push approved on mobile device",benign,handwritten
+"vpn connected from branch office",benign,handwritten
+"report generated and saved to team share",benign,handwritten
+"database maintenance window started",benign,handwritten
+"certificate renewed for internal service",benign,handwritten
+"dns resolution succeeded for intranet site",benign,handwritten
+"workstation rebooted after updates",benign,handwritten
+"membership reviewed in quarterly access audit",benign,handwritten
+"change ticket approved and applied by operations admin",benign,handwritten
+"service restarted by operations engineer",benign,handwritten
+"log rotation completed",benign,handwritten
+"sso login completed from office network",benign,handwritten
+"file copied to shared team folder",benign,handwritten
+"payroll export downloaded by hr analyst",benign,handwritten
+"helpdesk unlocked account per verified user request",benign,handwritten
+"scanner uploaded documents to document management",benign,handwritten
+"release build deployed through pipeline",benign,handwritten
+"hourly snapshot taken of virtual machine",benign,handwritten
+"user signed out of webmail normally",benign,handwritten
+"scheduled maintenance database index rebuild finished",benign,handwritten
+"load balancer health check passed",benign,handwritten
+"onboarding workflow created standard user account",benign,handwritten
+"read quarterly report pdf",benign,fixture
+"read backup manifest /srv/backups/manifest.txt",benign,fixture
+"read cafeteria menu document",benign,fixture
+"read configuration file /etc/app/config.yaml",benign,fixture
+"read design document",benign,fixture
+"read holiday schedule document",benign,fixture
+"read shared calendar document",benign,fixture
+"read shared document",benign,fixture
+"viewed intranet news page",benign,fixture
+"wrote backup archive /srv/backups/nightly-001.tar",benign,fixture
+"wrote scratch notes file",benign,fixture
+"downloaded quarterly report pdf",benign,fixture
+"printer queue drained",benign,fixture
+"system clock synced with ntp",benign,fixture
+"sso assertion accepted",benign,fixture
+"session renewed via kerberos ticket",benign,fixture
+"vpn tunnel established with mfa",benign,fixture
+"portal session established",benign,fixture
+"interactive logon at workstation",benign,fixture
+"user session established from corporate network",benign,fixture
+"user session established after retry",benign,fixture
+"user session established on third attempt",benign,fixture
+"admin console logon",benign,fixture
+"added to local helpdesk group by change ticket CHG-1042",benign,fixture

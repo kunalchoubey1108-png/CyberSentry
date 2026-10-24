@@ -1,0 +1,7 @@
+host,criticality,role
+web-01.lab.local,4,web_server
+db-01.lab.local,5,database
+dc-01.lab.local,5,domain_controller
+vpn-01.lab.local,4,vpn_gateway
+ws-01.lab.local,2,workstation
+ws-02.lab.local,2,workstation

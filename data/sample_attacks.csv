@@ -1,0 +1,360 @@
+event_id,timestamp,event_type,user,host,src_ip,severity,message,privileged
+bg-0241,2024-06-10T08:02:26Z,process_start,ivan,ws-01.lab.local,10.0.8.108,2,started office suite,false
+bg-0269,2024-06-10T08:10:00Z,login_success,judy,web-01.lab.local,10.0.9.109,2,session renewed via kerberos ticket,false
+bg-0186,2024-06-10T08:16:50Z,process_start,bob,dc-01.lab.local,10.0.1.101,2,scheduled task executed: inventory scan,false
+bg-0259,2024-06-10T08:21:16Z,login_success,frank,vpn-01.lab.local,10.0.5.105,2,sso assertion accepted,false
+bg-0070,2024-06-10T08:29:41Z,login_success,frank,ws-02.lab.local,10.0.5.105,3,user session established from corporate network,false
+ben-startup-01,2024-06-10T08:30:00Z,login_success,bob,ws-02.lab.local,10.0.1.101,2,interactive logon at workstation,false
+bg-0113,2024-06-10T08:30:56Z,login_success,judy,vpn-01.lab.local,10.0.9.109,2,user session established from corporate network,false
+ben-startup-02,2024-06-10T08:31:00Z,process_start,bob,ws-02.lab.local,10.0.1.101,2,started office suite,false
+ben-startup-03,2024-06-10T08:33:00Z,process_start,bob,ws-02.lab.local,10.0.1.101,2,started browser,false
+ben-vpn-01,2024-06-10T08:45:00Z,login_success,carol,vpn-01.lab.local,10.0.2.102,2,vpn tunnel established with mfa,false
+bg-0147,2024-06-10T08:46:59Z,process_start,alice,ws-01.lab.local,10.0.0.100,3,started database client,false
+ben-vpn-02,2024-06-10T08:47:00Z,process_start,carol,vpn-01.lab.local,10.0.2.102,2,started remote desktop gateway,false
+bg-0071,2024-06-10T08:53:51Z,process_start,judy,ws-01.lab.local,10.0.9.109,3,started browser,false
+bg-0089,2024-06-10T08:56:56Z,login_success,bob,ws-02.lab.local,10.0.1.101,3,sso assertion accepted,false
+bg-0042,2024-06-10T08:58:47Z,file_access,ivan,web-01.lab.local,10.0.8.108,2,wrote scratch notes file,false
+bg-0214,2024-06-10T09:01:36Z,file_access,carol,web-01.lab.local,10.0.2.102,2,wrote scratch notes file,false
+ben-morning-01,2024-06-10T09:05:00Z,login_success,alice,ws-01.lab.local,10.0.0.100,2,user session established from corporate network,false
+ben-morning-02,2024-06-10T09:06:00Z,process_start,alice,ws-01.lab.local,10.0.0.100,2,started email client,false
+bg-0240,2024-06-10T09:07:08Z,login_success,bob,vpn-01.lab.local,10.0.1.101,3,sso assertion accepted,false
+bg-0243,2024-06-10T09:09:41Z,file_access,carol,ws-01.lab.local,10.0.2.102,3,read quarterly report pdf,false
+bg-0021,2024-06-10T09:10:55Z,login_success,bob,ws-01.lab.local,10.0.1.101,3,session renewed via kerberos ticket,false
+bg-0130,2024-06-10T09:14:26Z,login_success,heidi,dc-01.lab.local,10.0.7.107,2,sso assertion accepted,false
+ben-morning-03,2024-06-10T09:21:00Z,file_access,alice,ws-01.lab.local,10.0.0.100,2,read shared calendar document,false
+bg-0222,2024-06-10T09:21:29Z,login_success,grace,ws-01.lab.local,10.0.6.106,2,sso assertion accepted,false
+bg-0188,2024-06-10T09:24:21Z,login_success,bob,ws-02.lab.local,10.0.1.101,2,user session established from corporate network,false
+bg-0266,2024-06-10T09:34:36Z,login_success,bob,db-01.lab.local,10.0.1.101,2,user session established from corporate network,false
+bg-0190,2024-06-10T09:38:27Z,file_access,grace,vpn-01.lab.local,10.0.6.106,2,read quarterly report pdf,false
+bg-0140,2024-06-10T09:39:14Z,process_start,bob,dc-01.lab.local,10.0.1.101,3,started database client,false
+ben-mixrt-01,2024-06-10T09:40:00Z,login_success,alice,ws-01.lab.local,10.0.0.100,2,user session established from corporate network,false
+ben-mixrt-02,2024-06-10T09:44:00Z,process_start,alice,ws-01.lab.local,10.0.0.100,2,started code editor,false
+bg-0149,2024-06-10T10:00:00Z,file_access,grace,web-01.lab.local,10.0.6.106,3,wrote scratch notes file,false
+bg-0273,2024-06-10T10:00:44Z,file_access,carol,web-01.lab.local,10.0.2.102,2,wrote scratch notes file,false
+ben-mixrt-03,2024-06-10T10:02:00Z,file_access,alice,ws-01.lab.local,10.0.0.100,2,read design document,false
+bg-0051,2024-06-10T10:11:43Z,login_failed,erin,ws-02.lab.local,10.0.4.104,4,authentication failed: incorrect password (attempt 1 of 3),false
+ben-maint-01,2024-06-10T10:14:00Z,login_success,frank,ws-01.lab.local,10.0.5.105,2,admin console logon,false
+ben-maint-02,2024-06-10T10:15:00Z,privilege_change,frank,ws-01.lab.local,10.0.5.105,4,added to local helpdesk group by change ticket CHG-1042,true
+bg-0160,2024-06-10T10:15:34Z,login_success,heidi,ws-02.lab.local,10.0.7.107,2,sso assertion accepted,false
+bg-0100,2024-06-10T10:16:49Z,login_success,dave,web-01.lab.local,10.0.3.103,3,user session established from corporate network,false
+bg-0163,2024-06-10T10:17:41Z,login_success,bob,vpn-01.lab.local,10.0.1.101,3,session renewed via kerberos ticket,false
+bg-0026,2024-06-10T10:19:40Z,login_success,dave,ws-02.lab.local,10.0.3.103,2,session renewed via kerberos ticket,false
+bg-0059,2024-06-10T10:23:33Z,other,frank,vpn-01.lab.local,10.0.5.105,2,printer queue drained,false
+bg-0251,2024-06-10T10:26:34Z,login_success,bob,web-01.lab.local,10.0.1.101,2,sso assertion accepted,false
+bg-0098,2024-06-10T10:27:57Z,login_success,grace,vpn-01.lab.local,10.0.6.106,3,user session established from corporate network,false
+bg-0153,2024-06-10T10:30:41Z,file_access,carol,db-01.lab.local,10.0.2.102,2,wrote scratch notes file,false
+bg-0003,2024-06-10T10:41:56Z,login_success,judy,ws-01.lab.local,10.0.9.109,3,session renewed via kerberos ticket,false
+bg-0078,2024-06-10T10:46:17Z,login_success,alice,web-01.lab.local,10.0.0.100,3,user session established from corporate network,false
+bg-0187,2024-06-10T10:52:58Z,login_success,carol,vpn-01.lab.local,10.0.2.102,3,session renewed via kerberos ticket,false
+ben-web-01,2024-06-10T11:00:00Z,login_success,dave,web-01.lab.local,10.0.3.103,2,portal session established,false
+bg-0217,2024-06-10T11:05:15Z,login_success,carol,vpn-01.lab.local,10.0.2.102,2,user session established from corporate network,false
+ben-web-02,2024-06-10T11:08:00Z,file_access,dave,web-01.lab.local,10.0.3.103,2,downloaded quarterly report pdf,false
+bg-0063,2024-06-10T11:17:43Z,process_start,grace,ws-01.lab.local,10.0.6.106,3,scheduled task executed: inventory scan,false
+ben-web-03,2024-06-10T11:19:00Z,file_access,dave,web-01.lab.local,10.0.3.103,2,viewed intranet news page,false
+bg-0061,2024-06-10T11:22:22Z,file_access,alice,dc-01.lab.local,10.0.0.100,2,read configuration file /etc/app/config.yaml,false
+bg-0223,2024-06-10T11:27:53Z,file_access,erin,db-01.lab.local,10.0.4.104,3,read quarterly report pdf,false
+bg-0157,2024-06-10T11:36:32Z,process_start,alice,ws-02.lab.local,10.0.0.100,3,started office suite,false
+bg-0119,2024-06-10T11:59:46Z,login_success,bob,db-01.lab.local,10.0.1.101,2,session renewed via kerberos ticket,false
+bg-0263,2024-06-10T11:59:57Z,login_success,carol,dc-01.lab.local,10.0.2.102,2,session renewed via kerberos ticket,false
+bg-0066,2024-06-10T12:01:37Z,login_failed,ivan,ws-02.lab.local,10.0.8.108,4,authentication failed: incorrect password (attempt 1 of 3),false
+bg-0169,2024-06-10T12:05:08Z,process_start,frank,db-01.lab.local,10.0.5.105,3,started browser,false
+bg-0196,2024-06-10T12:08:03Z,login_success,carol,vpn-01.lab.local,10.0.2.102,2,session renewed via kerberos ticket,false
+bg-0109,2024-06-10T12:08:37Z,login_success,dave,web-01.lab.local,10.0.3.103,3,session renewed via kerberos ticket,false
+bg-0249,2024-06-10T12:10:58Z,file_access,frank,dc-01.lab.local,10.0.5.105,3,wrote scratch notes file,false
+bg-0136,2024-06-10T12:22:09Z,process_start,alice,dc-01.lab.local,10.0.0.100,3,started office suite,false
+bg-0272,2024-06-10T12:29:48Z,process_start,erin,dc-01.lab.local,10.0.4.104,2,started browser,false
+ben-lunch-01,2024-06-10T12:30:00Z,file_access,judy,web-01.lab.local,10.0.9.109,2,read cafeteria menu document,false
+bg-0216,2024-06-10T12:32:07Z,file_access,judy,vpn-01.lab.local,10.0.9.109,3,read configuration file /etc/app/config.yaml,false
+bg-0115,2024-06-10T12:32:34Z,file_access,frank,dc-01.lab.local,10.0.5.105,2,read configuration file /etc/app/config.yaml,false
+ben-lunch-02,2024-06-10T12:34:00Z,file_access,judy,web-01.lab.local,10.0.9.109,2,read holiday schedule document,false
+bg-0276,2024-06-10T12:35:39Z,login_success,alice,ws-02.lab.local,10.0.0.100,2,user session established from corporate network,false
+bg-0139,2024-06-10T12:54:46Z,login_success,alice,ws-01.lab.local,10.0.0.100,3,session renewed via kerberos ticket,false
+bg-0127,2024-06-10T13:00:58Z,file_access,dave,ws-02.lab.local,10.0.3.103,3,read configuration file /etc/app/config.yaml,false
+bg-0155,2024-06-10T13:04:10Z,process_start,ivan,web-01.lab.local,10.0.8.108,3,started database client,false
+bg-0191,2024-06-10T13:08:19Z,file_access,ivan,vpn-01.lab.local,10.0.8.108,3,read configuration file /etc/app/config.yaml,false
+bg-0179,2024-06-10T13:08:46Z,process_start,alice,web-01.lab.local,10.0.0.100,3,scheduled task executed: inventory scan,false
+bg-0054,2024-06-10T13:12:22Z,process_start,frank,web-01.lab.local,10.0.5.105,3,started browser,false
+bg-0044,2024-06-10T13:16:49Z,login_success,judy,vpn-01.lab.local,10.0.9.109,3,sso assertion accepted,false
+bg-0224,2024-06-10T13:19:53Z,file_access,erin,ws-02.lab.local,10.0.4.104,3,read configuration file /etc/app/config.yaml,false
+ben-retry-01,2024-06-10T13:20:00Z,login_failed,heidi,ws-02.lab.local,10.0.7.107,3,authentication failed: incorrect password (attempt 1 of 3),false
+bg-0182,2024-06-10T13:21:27Z,login_success,dave,db-01.lab.local,10.0.3.103,2,session renewed via kerberos ticket,false
+ben-retry-02,2024-06-10T13:22:00Z,login_success,heidi,ws-02.lab.local,10.0.7.107,2,user session established after retry,false
+bg-0013,2024-06-10T13:25:35Z,login_success,dave,vpn-01.lab.local,10.0.3.103,3,sso assertion accepted,false
+bg-0077,2024-06-10T13:27:11Z,file_access,frank,ws-02.lab.local,10.0.5.105,2,wrote scratch notes file,false
+bg-0152,2024-06-10T13:30:47Z,login_success,dave,vpn-01.lab.local,10.0.3.103,2,user session established from corporate network,false
+bg-0162,2024-06-10T13:34:22Z,login_success,judy,db-01.lab.local,10.0.9.109,3,sso assertion accepted,false
+bg-0207,2024-06-10T13:35:14Z,file_access,frank,dc-01.lab.local,10.0.5.105,2,read quarterly report pdf,false
+bg-0027,2024-06-10T13:42:12Z,login_success,grace,web-01.lab.local,10.0.6.106,3,session renewed via kerberos ticket,false
+bg-0233,2024-06-10T13:42:13Z,other,erin,vpn-01.lab.local,10.0.4.104,2,system clock synced with ntp,false
+bg-0135,2024-06-10T13:44:43Z,process_start,carol,db-01.lab.local,10.0.2.102,3,scheduled task executed: inventory scan,false
+bg-0116,2024-06-10T13:47:27Z,login_success,grace,web-01.lab.local,10.0.6.106,3,user session established from corporate network,false
+bg-0080,2024-06-10T13:53:08Z,login_success,frank,dc-01.lab.local,10.0.5.105,2,user session established from corporate network,false
+bg-0257,2024-06-10T13:54:04Z,process_start,judy,db-01.lab.local,10.0.9.109,3,started browser,false
+bg-0079,2024-06-10T14:20:42Z,file_access,judy,db-01.lab.local,10.0.9.109,3,read configuration file /etc/app/config.yaml,false
+bg-0067,2024-06-10T14:25:38Z,login_success,erin,ws-02.lab.local,10.0.4.104,2,user session established from corporate network,false
+bg-0209,2024-06-10T14:31:19Z,file_access,judy,dc-01.lab.local,10.0.9.109,2,read quarterly report pdf,false
+bg-0002,2024-06-10T14:34:24Z,login_failed,bob,vpn-01.lab.local,10.0.1.101,4,authentication failed: expired password prompt shown,false
+bg-0012,2024-06-10T14:37:35Z,file_access,carol,vpn-01.lab.local,10.0.2.102,3,read configuration file /etc/app/config.yaml,false
+bg-0008,2024-06-10T14:38:26Z,file_access,heidi,db-01.lab.local,10.0.7.107,3,read shared document,false
+bg-0180,2024-06-10T14:40:24Z,login_success,heidi,ws-02.lab.local,10.0.7.107,3,user session established from corporate network,false
+bg-0231,2024-06-10T14:41:15Z,process_start,judy,vpn-01.lab.local,10.0.9.109,2,scheduled task executed: inventory scan,false
+bg-0019,2024-06-10T14:42:53Z,process_start,erin,ws-01.lab.local,10.0.4.104,2,scheduled task executed: inventory scan,false
+bg-0138,2024-06-10T14:51:22Z,file_access,bob,vpn-01.lab.local,10.0.1.101,3,wrote scratch notes file,false
+bg-0170,2024-06-10T14:52:34Z,file_access,grace,ws-01.lab.local,10.0.6.106,3,read configuration file /etc/app/config.yaml,false
+bg-0038,2024-06-10T14:53:36Z,login_success,alice,vpn-01.lab.local,10.0.0.100,3,sso assertion accepted,false
+bg-0275,2024-06-10T15:00:22Z,login_success,erin,ws-01.lab.local,10.0.4.104,2,user session established from corporate network,false
+bg-0150,2024-06-10T15:03:18Z,file_access,bob,ws-01.lab.local,10.0.1.101,3,wrote scratch notes file,false
+bg-0047,2024-06-10T15:03:38Z,process_start,heidi,db-01.lab.local,10.0.7.107,2,started browser,false
+bg-0194,2024-06-10T15:12:56Z,process_start,bob,ws-01.lab.local,10.0.1.101,2,started database client,false
+bg-0261,2024-06-10T15:15:17Z,login_success,carol,dc-01.lab.local,10.0.2.102,2,sso assertion accepted,false
+bg-0203,2024-06-10T15:17:28Z,process_start,erin,web-01.lab.local,10.0.4.104,3,started office suite,false
+bg-0069,2024-06-10T15:22:48Z,login_success,bob,db-01.lab.local,10.0.1.101,3,session renewed via kerberos ticket,false
+bg-0227,2024-06-10T15:26:27Z,process_start,judy,ws-02.lab.local,10.0.9.109,2,scheduled task executed: inventory scan,false
+bg-0001,2024-06-10T15:26:30Z,process_start,erin,db-01.lab.local,10.0.4.104,3,scheduled task executed: inventory scan,false
+bg-0128,2024-06-10T15:27:17Z,process_start,erin,dc-01.lab.local,10.0.4.104,3,scheduled task executed: inventory scan,false
+bg-0025,2024-06-10T15:28:41Z,file_access,erin,ws-02.lab.local,10.0.4.104,3,wrote scratch notes file,false
+bg-0192,2024-06-10T15:31:24Z,login_success,dave,ws-02.lab.local,10.0.3.103,3,sso assertion accepted,false
+bg-0129,2024-06-10T15:33:37Z,login_success,bob,vpn-01.lab.local,10.0.1.101,3,session renewed via kerberos ticket,false
+ben-look-01,2024-06-10T15:40:00Z,login_failed,ivan,ws-02.lab.local,10.0.8.108,4,authentication failed: incorrect password (attempt 1 of 3),false
+ben-look-02,2024-06-10T15:41:30Z,login_failed,ivan,ws-02.lab.local,10.0.8.108,4,authentication failed: incorrect password (attempt 2 of 3),false
+ben-look-03,2024-06-10T15:42:30Z,login_success,ivan,ws-02.lab.local,10.0.8.108,3,user session established on third attempt,false
+bg-0236,2024-06-10T15:50:43Z,file_access,heidi,web-01.lab.local,10.0.7.107,2,read quarterly report pdf,false
+bg-0033,2024-06-10T15:53:46Z,process_start,ivan,vpn-01.lab.local,10.0.8.108,3,started office suite,false
+bg-0041,2024-06-10T15:57:48Z,process_start,frank,ws-01.lab.local,10.0.5.105,3,started office suite,false
+bg-0081,2024-06-10T15:59:32Z,process_start,frank,db-01.lab.local,10.0.5.105,3,scheduled task executed: inventory scan,false
+bg-0076,2024-06-10T16:02:24Z,file_access,ivan,vpn-01.lab.local,10.0.8.108,3,wrote scratch notes file,false
+bg-0253,2024-06-10T16:08:05Z,login_failed,heidi,ws-02.lab.local,10.0.7.107,3,authentication failed: incorrect password (attempt 1 of 3),false
+ben-mixla-01,2024-06-10T16:10:00Z,login_failed,judy,web-01.lab.local,10.0.9.109,4,authentication failed: incorrect password (attempt 1 of 3),false
+ben-mixla-02,2024-06-10T16:11:30Z,login_failed,judy,web-01.lab.local,10.0.9.109,4,authentication failed: incorrect password (attempt 2 of 3),false
+ben-mixla-03,2024-06-10T16:12:30Z,login_success,judy,web-01.lab.local,10.0.9.109,3,user session established on third attempt,false
+mix-priv-01,2024-06-10T16:16:00Z,privilege_change,judy,web-01.lab.local,10.0.9.250,7,"added to local administrators group, no change ticket",true
+bg-0024,2024-06-10T16:18:49Z,file_access,frank,dc-01.lab.local,10.0.5.105,3,wrote scratch notes file,false
+bg-0087,2024-06-10T16:21:11Z,file_access,frank,ws-02.lab.local,10.0.5.105,3,read shared document,false
+bg-0124,2024-06-10T16:27:37Z,process_start,bob,web-01.lab.local,10.0.1.101,3,scheduled task executed: inventory scan,false
+bg-0040,2024-06-10T16:30:04Z,file_access,dave,ws-01.lab.local,10.0.3.103,3,wrote scratch notes file,false
+bg-0036,2024-06-10T16:33:51Z,file_access,judy,vpn-01.lab.local,10.0.9.109,3,wrote scratch notes file,false
+bg-0082,2024-06-10T16:34:36Z,process_start,judy,ws-02.lab.local,10.0.9.109,3,started browser,false
+bg-0267,2024-06-10T16:36:55Z,login_success,dave,vpn-01.lab.local,10.0.3.103,2,sso assertion accepted,false
+bg-0239,2024-06-10T16:42:00Z,process_start,erin,ws-01.lab.local,10.0.4.104,2,started office suite,false
+bg-0159,2024-06-10T16:44:54Z,login_success,grace,db-01.lab.local,10.0.6.106,3,user session established from corporate network,false
+bg-0258,2024-06-10T16:45:10Z,other,dave,web-01.lab.local,10.0.3.103,2,printer queue drained,false
+bg-0118,2024-06-10T16:47:53Z,process_start,ivan,ws-01.lab.local,10.0.8.108,2,started office suite,false
+bg-0229,2024-06-10T16:53:16Z,other,bob,web-01.lab.local,10.0.1.101,3,system clock synced with ntp,false
+bg-0101,2024-06-10T17:08:40Z,login_success,alice,vpn-01.lab.local,10.0.0.100,3,sso assertion accepted,false
+bg-0103,2024-06-10T17:09:26Z,login_success,ivan,vpn-01.lab.local,10.0.8.108,3,session renewed via kerberos ticket,false
+bg-0084,2024-06-10T17:11:24Z,file_access,judy,db-01.lab.local,10.0.9.109,3,wrote scratch notes file,false
+bg-0143,2024-06-10T17:17:18Z,login_success,frank,db-01.lab.local,10.0.5.105,2,sso assertion accepted,false
+bg-0017,2024-06-10T17:31:07Z,process_start,ivan,dc-01.lab.local,10.0.8.108,2,scheduled task executed: inventory scan,false
+bg-0199,2024-06-10T17:33:19Z,file_access,ivan,db-01.lab.local,10.0.8.108,2,wrote scratch notes file,false
+bg-0088,2024-06-10T17:33:22Z,process_start,bob,web-01.lab.local,10.0.1.101,2,scheduled task executed: inventory scan,false
+bg-0262,2024-06-10T17:33:28Z,login_success,carol,vpn-01.lab.local,10.0.2.102,3,user session established from corporate network,false
+bg-0189,2024-06-10T17:52:06Z,process_start,judy,ws-02.lab.local,10.0.9.109,3,scheduled task executed: inventory scan,false
+bg-0005,2024-06-10T17:53:30Z,login_success,erin,web-01.lab.local,10.0.4.104,3,user session established from corporate network,false
+bg-0175,2024-06-10T18:01:36Z,file_access,heidi,dc-01.lab.local,10.0.7.107,2,read shared document,false
+bg-0108,2024-06-10T18:04:03Z,process_start,heidi,ws-01.lab.local,10.0.7.107,2,started browser,false
+bg-0201,2024-06-10T18:11:19Z,process_start,erin,ws-02.lab.local,10.0.4.104,2,started office suite,false
+bg-0007,2024-06-10T18:18:06Z,login_success,erin,web-01.lab.local,10.0.4.104,2,user session established from corporate network,false
+bg-0093,2024-06-10T18:24:02Z,file_access,frank,vpn-01.lab.local,10.0.5.105,2,read quarterly report pdf,false
+bg-0195,2024-06-10T18:28:52Z,login_success,grace,ws-02.lab.local,10.0.6.106,3,user session established from corporate network,false
+bg-0148,2024-06-10T18:30:15Z,login_success,heidi,ws-02.lab.local,10.0.7.107,3,session renewed via kerberos ticket,false
+bg-0004,2024-06-10T18:41:23Z,login_success,erin,ws-01.lab.local,10.0.4.104,2,sso assertion accepted,false
+bg-0268,2024-06-10T18:42:00Z,login_success,erin,ws-02.lab.local,10.0.4.104,3,sso assertion accepted,false
+bg-0198,2024-06-10T18:48:15Z,file_access,alice,ws-02.lab.local,10.0.0.100,2,read quarterly report pdf,false
+bg-0131,2024-06-10T18:53:54Z,file_access,bob,ws-02.lab.local,10.0.1.101,3,wrote scratch notes file,false
+bg-0178,2024-06-10T18:54:03Z,file_access,judy,db-01.lab.local,10.0.9.109,3,wrote scratch notes file,false
+bg-0006,2024-06-10T18:54:38Z,process_start,frank,web-01.lab.local,10.0.5.105,3,scheduled task executed: inventory scan,false
+ben-backup-01,2024-06-10T19:00:00Z,process_start,grace,db-01.lab.local,10.0.6.106,3,scheduled backup job started,false
+bg-0220,2024-06-10T19:00:33Z,file_access,judy,vpn-01.lab.local,10.0.9.109,2,read shared document,false
+bg-0073,2024-06-10T19:01:51Z,file_access,carol,db-01.lab.local,10.0.2.102,2,read shared document,false
+bg-0172,2024-06-10T19:04:32Z,process_start,dave,web-01.lab.local,10.0.3.103,3,started browser,false
+bg-0238,2024-06-10T19:07:26Z,login_success,dave,ws-02.lab.local,10.0.3.103,2,sso assertion accepted,false
+ben-backup-02,2024-06-10T19:12:00Z,file_access,grace,db-01.lab.local,10.0.6.106,2,read backup manifest /srv/backups/manifest.txt,false
+bg-0121,2024-06-10T19:15:07Z,file_access,frank,web-01.lab.local,10.0.5.105,3,read quarterly report pdf,false
+bg-0056,2024-06-10T19:20:40Z,file_access,dave,vpn-01.lab.local,10.0.3.103,2,read shared document,false
+bg-0208,2024-06-10T19:22:16Z,login_success,alice,web-01.lab.local,10.0.0.100,3,session renewed via kerberos ticket,false
+ben-backup-03,2024-06-10T19:25:00Z,file_access,grace,db-01.lab.local,10.0.6.106,2,wrote backup archive /srv/backups/nightly-001.tar,false
+bg-0086,2024-06-10T19:27:28Z,login_failed,judy,ws-01.lab.local,10.0.9.109,3,authentication failed: expired password prompt shown,false
+bg-0097,2024-06-10T19:47:08Z,process_start,alice,ws-01.lab.local,10.0.0.100,2,started database client,false
+atk-offpriv-01,2024-06-11T02:30:00Z,login_success,frank,dc-01.lab.local,203.0.113.42,6,privileged interactive logon on domain controller outside working hours,true
+atk-offlogin-01,2024-06-11T03:10:00Z,login_success,judy,ws-02.lab.local,10.0.9.109,5,interactive logon outside working hours,false
+mix-offhour-01,2024-06-11T03:40:00Z,login_success,alice,ws-01.lab.local,10.0.0.100,5,interactive logon outside working hours,false
+bg-0184,2024-06-11T08:08:56Z,file_access,erin,dc-01.lab.local,10.0.4.104,3,read shared document,false
+bg-0215,2024-06-11T08:10:38Z,login_success,ivan,vpn-01.lab.local,10.0.8.108,2,session renewed via kerberos ticket,false
+bg-0176,2024-06-11T08:10:50Z,login_failed,bob,dc-01.lab.local,10.0.1.101,4,authentication failed: expired password prompt shown,false
+bg-0218,2024-06-11T08:13:17Z,login_success,carol,dc-01.lab.local,10.0.2.102,2,session renewed via kerberos ticket,false
+bg-0156,2024-06-11T08:16:40Z,login_success,judy,ws-02.lab.local,10.0.9.109,3,session renewed via kerberos ticket,false
+bg-0050,2024-06-11T08:17:06Z,login_success,ivan,vpn-01.lab.local,10.0.8.108,2,sso assertion accepted,false
+bg-0277,2024-06-11T08:17:22Z,process_start,alice,db-01.lab.local,10.0.0.100,2,started database client,false
+bg-0260,2024-06-11T08:18:51Z,login_success,grace,ws-02.lab.local,10.0.6.106,2,sso assertion accepted,false
+bg-0255,2024-06-11T08:21:14Z,login_success,frank,vpn-01.lab.local,10.0.5.105,2,sso assertion accepted,false
+bg-0234,2024-06-11T08:21:30Z,login_success,grace,vpn-01.lab.local,10.0.6.106,3,session renewed via kerberos ticket,false
+bg-0183,2024-06-11T08:23:47Z,login_success,bob,web-01.lab.local,10.0.1.101,2,user session established from corporate network,false
+bg-0035,2024-06-11T08:26:46Z,login_success,dave,vpn-01.lab.local,10.0.3.103,3,sso assertion accepted,false
+bg-0104,2024-06-11T08:37:19Z,process_start,dave,ws-02.lab.local,10.0.3.103,3,scheduled task executed: inventory scan,false
+bg-0166,2024-06-11T08:38:38Z,file_access,dave,vpn-01.lab.local,10.0.3.103,2,wrote scratch notes file,false
+bg-0145,2024-06-11T08:42:46Z,other,ivan,dc-01.lab.local,10.0.8.108,3,system clock synced with ntp,false
+bg-0137,2024-06-11T08:50:21Z,login_success,heidi,web-01.lab.local,10.0.7.107,2,sso assertion accepted,false
+bg-0235,2024-06-11T08:50:54Z,process_start,dave,vpn-01.lab.local,10.0.3.103,2,started database client,false
+bg-0174,2024-06-11T08:50:57Z,login_success,alice,db-01.lab.local,10.0.0.100,2,sso assertion accepted,false
+bg-0020,2024-06-11T08:52:09Z,login_success,heidi,web-01.lab.local,10.0.7.107,2,session renewed via kerberos ticket,false
+bg-0265,2024-06-11T08:54:54Z,other,frank,ws-01.lab.local,10.0.5.105,2,printer queue drained,false
+bg-0105,2024-06-11T09:17:22Z,login_success,ivan,web-01.lab.local,10.0.8.108,2,session renewed via kerberos ticket,false
+bg-0247,2024-06-11T09:21:39Z,process_start,frank,db-01.lab.local,10.0.5.105,2,started browser,false
+bg-0060,2024-06-11T09:30:39Z,login_success,bob,web-01.lab.local,10.0.1.101,2,session renewed via kerberos ticket,false
+bg-0065,2024-06-11T09:43:19Z,process_start,judy,dc-01.lab.local,10.0.9.109,2,scheduled task executed: inventory scan,false
+bg-0242,2024-06-11T09:47:33Z,file_access,alice,ws-01.lab.local,10.0.0.100,3,wrote scratch notes file,false
+bg-0085,2024-06-11T09:58:49Z,login_failed,grace,dc-01.lab.local,10.0.6.106,4,authentication failed: expired password prompt shown,false
+bg-0015,2024-06-11T10:02:05Z,process_start,bob,vpn-01.lab.local,10.0.1.101,2,started browser,false
+bg-0246,2024-06-11T10:04:32Z,process_start,heidi,vpn-01.lab.local,10.0.7.107,2,started database client,false
+bg-0165,2024-06-11T10:08:33Z,login_success,alice,db-01.lab.local,10.0.0.100,2,user session established from corporate network,false
+bg-0092,2024-06-11T10:10:57Z,file_access,carol,db-01.lab.local,10.0.2.102,3,read quarterly report pdf,false
+bg-0254,2024-06-11T10:12:48Z,other,heidi,ws-01.lab.local,10.0.7.107,3,printer queue drained,false
+bg-0090,2024-06-11T10:15:22Z,file_access,frank,db-01.lab.local,10.0.5.105,2,read configuration file /etc/app/config.yaml,false
+bg-0094,2024-06-11T10:17:24Z,login_success,alice,dc-01.lab.local,10.0.0.100,2,session renewed via kerberos ticket,false
+atk-brute-01,2024-06-11T10:30:00Z,login_failed,erin,web-01.lab.local,203.0.113.10,4,authentication failed: incorrect password (attempt 1 of 3),false
+atk-brute-02,2024-06-11T10:30:20Z,login_failed,erin,web-01.lab.local,203.0.113.10,4,authentication failed: incorrect password (attempt 2 of 3),false
+atk-brute-03,2024-06-11T10:30:40Z,login_failed,erin,web-01.lab.local,203.0.113.10,4,authentication failed: incorrect password (attempt 3 of 3),false
+atk-brute-04,2024-06-11T10:31:00Z,login_failed,erin,web-01.lab.local,203.0.113.10,4,authentication failed: incorrect password (attempt 4 of 3),false
+atk-brute-05,2024-06-11T10:31:20Z,login_failed,erin,web-01.lab.local,203.0.113.10,5,authentication failed: incorrect password (attempt 5 of 3),false
+atk-brute-06,2024-06-11T10:31:40Z,login_failed,erin,web-01.lab.local,203.0.113.10,5,authentication failed: incorrect password (attempt 6 of 3),false
+atk-brute-07,2024-06-11T10:32:00Z,login_failed,erin,web-01.lab.local,203.0.113.10,5,authentication failed: incorrect password (attempt 7 of 3),false
+atk-brute-08,2024-06-11T10:32:20Z,login_failed,erin,web-01.lab.local,203.0.113.10,5,authentication failed: incorrect password (attempt 8 of 3),false
+atk-brute-09,2024-06-11T10:32:40Z,login_success,erin,web-01.lab.local,203.0.113.10,5,user session established after repeated failures,false
+atk-brute-10,2024-06-11T10:33:40Z,privilege_change,erin,web-01.lab.local,203.0.113.10,7,"added to local administrators group, no change ticket",true
+bg-0083,2024-06-11T10:35:45Z,login_success,grace,ws-01.lab.local,10.0.6.106,3,session renewed via kerberos ticket,false
+bg-0095,2024-06-11T10:41:11Z,login_success,carol,vpn-01.lab.local,10.0.2.102,3,sso assertion accepted,false
+bg-0023,2024-06-11T10:58:57Z,login_success,grace,ws-01.lab.local,10.0.6.106,3,sso assertion accepted,false
+bg-0096,2024-06-11T10:59:45Z,login_success,alice,web-01.lab.local,10.0.0.100,3,sso assertion accepted,false
+bg-0185,2024-06-11T11:00:35Z,file_access,judy,web-01.lab.local,10.0.9.109,3,wrote scratch notes file,false
+bg-0022,2024-06-11T11:23:29Z,login_success,carol,web-01.lab.local,10.0.2.102,2,user session established from corporate network,false
+bg-0122,2024-06-11T11:24:17Z,process_start,grace,web-01.lab.local,10.0.6.106,2,scheduled task executed: inventory scan,false
+bg-0046,2024-06-11T11:24:37Z,login_success,carol,dc-01.lab.local,10.0.2.102,2,user session established from corporate network,false
+bg-0158,2024-06-11T11:25:08Z,file_access,carol,web-01.lab.local,10.0.2.102,3,read configuration file /etc/app/config.yaml,false
+bg-0274,2024-06-11T11:26:19Z,login_success,ivan,ws-02.lab.local,10.0.8.108,2,sso assertion accepted,false
+bg-0154,2024-06-11T11:28:11Z,login_success,carol,ws-02.lab.local,10.0.2.102,3,user session established from corporate network,false
+atk-spray-01,2024-06-11T11:30:00Z,login_failed,alice,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 1),false
+atk-spray-01b,2024-06-11T11:30:30Z,login_failed,alice,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 2),false
+atk-spray-02,2024-06-11T11:31:00Z,login_failed,bob,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 1),false
+atk-spray-02b,2024-06-11T11:31:30Z,login_failed,bob,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 2),false
+bg-0161,2024-06-11T11:31:49Z,other,judy,ws-02.lab.local,10.0.9.109,3,printer queue drained,false
+atk-spray-03,2024-06-11T11:32:00Z,login_failed,carol,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 1),false
+bg-0144,2024-06-11T11:32:12Z,process_start,bob,db-01.lab.local,10.0.1.101,3,started office suite,false
+atk-spray-03b,2024-06-11T11:32:30Z,login_failed,carol,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 2),false
+atk-spray-04,2024-06-11T11:33:00Z,login_failed,dave,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 1),false
+atk-spray-04b,2024-06-11T11:33:30Z,login_failed,dave,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 2),false
+atk-spray-05,2024-06-11T11:34:00Z,login_failed,grace,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 1),false
+atk-spray-05b,2024-06-11T11:34:30Z,login_failed,grace,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 2),false
+bg-0009,2024-06-11T11:34:42Z,file_access,dave,ws-02.lab.local,10.0.3.103,3,read configuration file /etc/app/config.yaml,false
+atk-spray-06,2024-06-11T11:35:00Z,login_failed,heidi,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 1),false
+atk-spray-06b,2024-06-11T11:35:30Z,login_failed,heidi,web-01.lab.local,198.51.100.66,4,authentication failed: password spray pattern (attempt 2),false
+bg-0173,2024-06-11T11:37:42Z,process_start,frank,ws-01.lab.local,10.0.5.105,3,started browser,false
+bg-0177,2024-06-11T11:40:28Z,process_start,frank,web-01.lab.local,10.0.5.105,2,started database client,false
+bg-0028,2024-06-11T11:48:30Z,file_access,ivan,vpn-01.lab.local,10.0.8.108,2,read shared document,false
+bg-0271,2024-06-11T11:58:35Z,login_success,erin,web-01.lab.local,10.0.4.104,2,user session established from corporate network,false
+bg-0099,2024-06-11T12:03:04Z,file_access,grace,web-01.lab.local,10.0.6.106,2,wrote scratch notes file,false
+bg-0279,2024-06-11T12:04:49Z,process_start,bob,ws-01.lab.local,10.0.1.101,3,started browser,false
+bg-0226,2024-06-11T12:07:18Z,other,frank,ws-02.lab.local,10.0.5.105,3,printer queue drained,false
+bg-0057,2024-06-11T12:12:28Z,login_success,dave,db-01.lab.local,10.0.3.103,3,sso assertion accepted,false
+bg-0232,2024-06-11T12:16:37Z,file_access,alice,ws-02.lab.local,10.0.0.100,2,read quarterly report pdf,false
+bg-0029,2024-06-11T12:19:43Z,login_success,erin,ws-01.lab.local,10.0.4.104,3,user session established from corporate network,false
+bg-0112,2024-06-11T12:21:47Z,file_access,carol,vpn-01.lab.local,10.0.2.102,2,read quarterly report pdf,false
+bg-0014,2024-06-11T12:29:40Z,other,bob,web-01.lab.local,10.0.1.101,2,printer queue drained,false
+bg-0197,2024-06-11T12:32:06Z,login_success,grace,vpn-01.lab.local,10.0.6.106,2,user session established from corporate network,false
+bg-0181,2024-06-11T12:40:56Z,process_start,grace,ws-02.lab.local,10.0.6.106,2,started browser,false
+bg-0219,2024-06-11T12:48:50Z,other,heidi,dc-01.lab.local,10.0.7.107,2,system clock synced with ntp,false
+bg-0110,2024-06-11T12:54:54Z,file_access,carol,ws-02.lab.local,10.0.2.102,2,wrote scratch notes file,false
+bg-0102,2024-06-11T12:57:23Z,file_access,grace,db-01.lab.local,10.0.6.106,3,read shared document,false
+bg-0256,2024-06-11T12:59:18Z,file_access,alice,web-01.lab.local,10.0.0.100,2,wrote scratch notes file,false
+bg-0055,2024-06-11T13:04:05Z,login_success,grace,web-01.lab.local,10.0.6.106,3,sso assertion accepted,false
+bg-0205,2024-06-11T13:06:30Z,login_success,carol,ws-02.lab.local,10.0.2.102,2,sso assertion accepted,false
+bg-0252,2024-06-11T13:14:31Z,login_success,frank,ws-01.lab.local,10.0.5.105,2,user session established from corporate network,false
+bg-0125,2024-06-11T13:31:44Z,login_success,heidi,ws-02.lab.local,10.0.7.107,2,user session established from corporate network,false
+bg-0030,2024-06-11T13:32:59Z,file_access,judy,web-01.lab.local,10.0.9.109,3,read configuration file /etc/app/config.yaml,false
+bg-0016,2024-06-11T13:33:41Z,login_failed,frank,db-01.lab.local,10.0.5.105,3,authentication failed: expired password prompt shown,false
+bg-0212,2024-06-11T13:33:50Z,process_start,alice,vpn-01.lab.local,10.0.0.100,3,started office suite,false
+bg-0043,2024-06-11T13:39:39Z,login_success,alice,vpn-01.lab.local,10.0.0.100,3,user session established from corporate network,false
+bg-0164,2024-06-11T13:45:03Z,process_start,dave,db-01.lab.local,10.0.3.103,2,scheduled task executed: inventory scan,false
+bg-0210,2024-06-11T13:47:33Z,login_success,judy,vpn-01.lab.local,10.0.9.109,2,session renewed via kerberos ticket,false
+bg-0134,2024-06-11T13:49:50Z,login_failed,ivan,ws-01.lab.local,10.0.8.108,4,authentication failed: incorrect password (attempt 1 of 3),false
+atk-privburst-01,2024-06-11T14:00:00Z,privilege_change,frank,web-01.lab.local,10.0.5.105,6,"added to backup operators group, no change ticket",true
+atk-beacon-01,2024-06-11T14:00:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+atk-privburst-02,2024-06-11T14:05:00Z,privilege_change,frank,web-01.lab.local,10.0.5.105,6,"added to power users group, no change ticket",true
+atk-beacon-02,2024-06-11T14:05:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+atk-privburst-03,2024-06-11T14:10:00Z,privilege_change,frank,web-01.lab.local,10.0.5.105,7,"added to local administrators group, no change ticket",true
+atk-beacon-03,2024-06-11T14:10:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+bg-0010,2024-06-11T14:11:09Z,login_success,bob,ws-01.lab.local,10.0.1.101,3,sso assertion accepted,false
+atk-beacon-04,2024-06-11T14:15:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+bg-0049,2024-06-11T14:15:38Z,login_success,frank,vpn-01.lab.local,10.0.5.105,2,user session established from corporate network,false
+bg-0193,2024-06-11T14:17:48Z,other,erin,ws-01.lab.local,10.0.4.104,2,system clock synced with ntp,false
+atk-beacon-05,2024-06-11T14:20:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+bg-0052,2024-06-11T14:23:32Z,process_start,grace,dc-01.lab.local,10.0.6.106,2,scheduled task executed: inventory scan,false
+atk-beacon-06,2024-06-11T14:25:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+atk-beacon-07,2024-06-11T14:30:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+bg-0120,2024-06-11T14:32:44Z,process_start,heidi,ws-02.lab.local,10.0.7.107,2,started office suite,false
+atk-beacon-08,2024-06-11T14:35:00Z,process_start,heidi,ws-01.lab.local,10.0.7.107,4,started updater.exe with fixed 300s interval,false
+bg-0151,2024-06-11T14:41:49Z,file_access,frank,vpn-01.lab.local,10.0.5.105,2,read shared document,false
+bg-0204,2024-06-11T14:46:21Z,process_start,carol,web-01.lab.local,10.0.2.102,3,started database client,false
+bg-0141,2024-06-11T14:49:26Z,process_start,erin,web-01.lab.local,10.0.4.104,3,started office suite,false
+bg-0072,2024-06-11T14:54:04Z,login_success,erin,ws-01.lab.local,10.0.4.104,2,user session established from corporate network,false
+bg-0171,2024-06-11T14:54:34Z,file_access,ivan,dc-01.lab.local,10.0.8.108,3,wrote scratch notes file,false
+bg-0062,2024-06-11T14:55:34Z,login_success,judy,ws-02.lab.local,10.0.9.109,3,session renewed via kerberos ticket,false
+bg-0213,2024-06-11T14:57:42Z,process_start,judy,ws-02.lab.local,10.0.9.109,2,started database client,false
+bg-0146,2024-06-11T15:02:12Z,process_start,ivan,ws-02.lab.local,10.0.8.108,2,started browser,false
+bg-0123,2024-06-11T15:08:14Z,file_access,dave,dc-01.lab.local,10.0.3.103,3,read quarterly report pdf,false
+atk-stage-01,2024-06-11T15:10:00Z,file_access,grace,db-01.lab.local,10.0.6.106,6,read credential store /etc/shadow,false
+atk-stage-02,2024-06-11T15:22:00Z,file_access,grace,db-01.lab.local,10.0.6.106,6,read credential store /etc/gshadow,false
+bg-0244,2024-06-11T15:22:34Z,file_access,ivan,ws-01.lab.local,10.0.8.108,3,read quarterly report pdf,false
+bg-0053,2024-06-11T15:29:40Z,file_access,bob,web-01.lab.local,10.0.1.101,2,read shared document,false
+atk-stage-03,2024-06-11T15:34:00Z,file_access,grace,db-01.lab.local,10.0.6.106,7,exported table dump /srv/data/users.dump,false
+atk-stage-04,2024-06-11T15:48:00Z,file_access,grace,db-01.lab.local,10.0.6.106,7,read private key /etc/ssl/private/service.key,false
+bg-0037,2024-06-11T15:50:29Z,file_access,erin,ws-01.lab.local,10.0.4.104,3,read quarterly report pdf,false
+atk-sweep-01,2024-06-11T16:05:00Z,login_failed,alice,dc-01.lab.local,192.0.2.20,5,authentication failed during horizontal sweep,false
+atk-sweep-02,2024-06-11T16:05:30Z,login_failed,bob,dc-01.lab.local,192.0.2.21,5,authentication failed during horizontal sweep,false
+atk-sweep-03,2024-06-11T16:06:00Z,login_failed,carol,dc-01.lab.local,192.0.2.22,5,authentication failed during horizontal sweep,false
+atk-sweep-04,2024-06-11T16:06:30Z,login_failed,dave,dc-01.lab.local,192.0.2.23,5,authentication failed during horizontal sweep,false
+atk-sweep-05,2024-06-11T16:07:00Z,login_failed,erin,dc-01.lab.local,192.0.2.24,5,authentication failed during horizontal sweep,false
+atk-sweep-06,2024-06-11T16:07:30Z,login_failed,frank,dc-01.lab.local,192.0.2.25,5,authentication failed during horizontal sweep,false
+bg-0048,2024-06-11T16:09:58Z,login_success,carol,dc-01.lab.local,10.0.2.102,3,sso assertion accepted,false
+bg-0206,2024-06-11T16:16:37Z,login_success,alice,ws-02.lab.local,10.0.0.100,2,sso assertion accepted,false
+bg-0032,2024-06-11T16:17:46Z,login_success,alice,ws-01.lab.local,10.0.0.100,3,session renewed via kerberos ticket,false
+bg-0280,2024-06-11T16:18:48Z,login_success,ivan,web-01.lab.local,10.0.8.108,3,session renewed via kerberos ticket,false
+bg-0230,2024-06-11T16:22:50Z,file_access,alice,ws-02.lab.local,10.0.0.100,3,wrote scratch notes file,false
+bg-0228,2024-06-11T16:24:29Z,file_access,carol,dc-01.lab.local,10.0.2.102,3,read configuration file /etc/app/config.yaml,false
+bg-0031,2024-06-11T16:49:06Z,login_success,carol,db-01.lab.local,10.0.2.102,2,sso assertion accepted,false
+bg-0167,2024-06-11T16:50:45Z,file_access,judy,web-01.lab.local,10.0.9.109,2,read configuration file /etc/app/config.yaml,false
+bg-0058,2024-06-11T16:50:54Z,login_failed,carol,ws-01.lab.local,10.0.2.102,3,authentication failed: incorrect password (attempt 1 of 3),false
+bg-0018,2024-06-11T16:52:47Z,login_success,ivan,web-01.lab.local,10.0.8.108,2,user session established from corporate network,false
+bg-0132,2024-06-11T16:52:54Z,other,alice,dc-01.lab.local,10.0.0.100,2,system clock synced with ntp,false
+bg-0221,2024-06-11T16:52:54Z,file_access,bob,dc-01.lab.local,10.0.1.101,3,read shared document,false
+bg-0034,2024-06-11T16:57:02Z,login_success,judy,ws-02.lab.local,10.0.9.109,2,session renewed via kerberos ticket,false
+bg-0237,2024-06-11T17:00:41Z,login_success,carol,ws-02.lab.local,10.0.2.102,3,user session established from corporate network,false
+bg-0064,2024-06-11T17:03:26Z,login_success,heidi,web-01.lab.local,10.0.7.107,2,sso assertion accepted,false
+bg-0264,2024-06-11T17:05:36Z,login_failed,frank,ws-01.lab.local,10.0.5.105,3,authentication failed: incorrect password (attempt 1 of 3),false
+bg-0126,2024-06-11T17:06:24Z,login_success,bob,db-01.lab.local,10.0.1.101,2,user session established from corporate network,false
+bg-0045,2024-06-11T17:06:44Z,login_success,ivan,db-01.lab.local,10.0.8.108,3,user session established from corporate network,false
+bg-0245,2024-06-11T17:22:19Z,login_success,judy,ws-02.lab.local,10.0.9.109,2,sso assertion accepted,false
+bg-0168,2024-06-11T17:29:54Z,file_access,bob,web-01.lab.local,10.0.1.101,3,read shared document,false
+bg-0250,2024-06-11T17:34:29Z,process_start,judy,ws-01.lab.local,10.0.9.109,3,scheduled task executed: inventory scan,false
+bg-0091,2024-06-11T17:36:21Z,file_access,ivan,web-01.lab.local,10.0.8.108,3,read shared document,false
+bg-0278,2024-06-11T17:42:37Z,process_start,grace,ws-02.lab.local,10.0.6.106,3,started database client,false
+bg-0111,2024-06-11T17:48:52Z,login_success,heidi,ws-01.lab.local,10.0.7.107,2,session renewed via kerberos ticket,false
+bg-0039,2024-06-11T17:54:30Z,login_success,carol,db-01.lab.local,10.0.2.102,3,session renewed via kerberos ticket,false
+bg-0270,2024-06-11T18:05:59Z,file_access,frank,ws-02.lab.local,10.0.5.105,2,read configuration file /etc/app/config.yaml,false
+bg-0248,2024-06-11T18:07:57Z,process_start,grace,dc-01.lab.local,10.0.6.106,3,started browser,false
+bg-0114,2024-06-11T18:08:32Z,login_success,dave,web-01.lab.local,10.0.3.103,3,session renewed via kerberos ticket,false
+bg-0107,2024-06-11T18:09:48Z,login_success,carol,web-01.lab.local,10.0.2.102,2,session renewed via kerberos ticket,false
+bg-0211,2024-06-11T18:25:40Z,file_access,grace,web-01.lab.local,10.0.6.106,2,wrote scratch notes file,false
+bg-0074,2024-06-11T18:48:05Z,process_start,judy,vpn-01.lab.local,10.0.9.109,3,started database client,false
+bg-0117,2024-06-11T18:59:07Z,other,heidi,db-01.lab.local,10.0.7.107,2,printer queue drained,false
+bg-0225,2024-06-11T19:02:36Z,process_start,dave,ws-02.lab.local,10.0.3.103,2,started browser,false
+bg-0068,2024-06-11T19:07:22Z,login_success,carol,ws-02.lab.local,10.0.2.102,3,sso assertion accepted,false
+bg-0075,2024-06-11T19:09:53Z,process_start,bob,ws-01.lab.local,10.0.1.101,2,started office suite,false
+atk-travel-01,2024-06-11T19:10:00Z,login_success,dave,web-01.lab.local,10.0.3.103,4,portal session established,false
+atk-travel-02,2024-06-11T19:13:00Z,login_success,dave,web-01.lab.local,198.51.100.200,6,portal session established from external address minutes after internal logon,false
+bg-0011,2024-06-11T19:21:48Z,login_success,dave,ws-01.lab.local,10.0.3.103,3,user session established from corporate network,false
+bg-0133,2024-06-11T19:22:42Z,file_access,frank,dc-01.lab.local,10.0.5.105,3,read configuration file /etc/app/config.yaml,false
+bg-0142,2024-06-11T19:25:35Z,file_access,bob,dc-01.lab.local,10.0.1.101,2,wrote scratch notes file,false
+bg-0106,2024-06-11T19:27:52Z,login_success,erin,ws-01.lab.local,10.0.4.104,3,session renewed via kerberos ticket,false
+bg-0202,2024-06-11T19:28:49Z,login_success,erin,dc-01.lab.local,10.0.4.104,3,sso assertion accepted,false
+bg-0200,2024-06-11T19:40:51Z,process_start,judy,db-01.lab.local,10.0.9.109,2,started office suite,false
+atk-extvpn-01,2024-06-11T22:15:00Z,login_success,carol,vpn-01.lab.local,203.0.113.77,6,vpn session established from unrecognized external address,false

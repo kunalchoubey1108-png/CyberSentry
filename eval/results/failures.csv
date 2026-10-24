@@ -1,0 +1,9 @@
+kind,ref,detail
+missed_scenario,mixed-routine-plus-offhours,"no rule-matched event — Alice's routine morning session, plus a single off-hours login two days later. Only the last event is suspicious."
+missed_scenario,mixed-lookalike-then-privilege-change,"no rule-matched event — A benign two-fail-then-success chain, immediately followed by an unticketed privilege change from a different IP on the same host. Only the last event is suspicious."
+missed_scenario,susp-sensitive-file-staging,no rule-matched event — Four reads of credential stores on db-01 within 40 minutes — the sensitive-file-access pattern.
+missed_scenario,susp-offhours-login,no rule-matched event — Successful login at 03:10 UTC from a workstation — outside working hours.
+missed_scenario,susp-privilege-escalation-burst,no rule-matched event — Three unticketed privilege changes for the same user within 15 minutes.
+missed_scenario,susp-beaconing,no rule-matched event — Identical process starts every 5 minutes — command-and-control beacon cadence.
+missed_scenario,susp-host-sweep,no rule-matched event — Six failed logins against dc-01 from six different external IPs in under three minutes.
+missed_scenario,susp-impossible-travel,no rule-matched event — Two successful logins for Dave three minutes apart from an internal and an external IP.
