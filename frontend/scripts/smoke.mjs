@@ -148,6 +148,31 @@ try {
   )
   const claimRows = await claimsTable.locator('tbody tr').count()
   check(claimRows === 20, `claims sample shows 20 rows for manual review (${claimRows})`)
+
+  // ---- responsive navigation -----------------------------------------------
+  console.log('6. responsive floating navigation')
+  await page.setViewportSize({ width: 390, height: 844 })
+  const menuButton = page.getByRole('button', { name: 'Open navigation menu' })
+  check(await menuButton.isVisible(), 'mobile menu button is visible')
+  check(
+    !(await page.getByRole('navigation', { name: 'Main navigation' }).isVisible()),
+    'desktop links are hidden on mobile',
+  )
+  await menuButton.click()
+  check(
+    await page.getByRole('navigation', { name: 'Mobile navigation' }).isVisible(),
+    'mobile navigation opens inside the floating pill',
+  )
+  check(
+    await page.getByRole('button', { name: 'Close navigation menu' }).getAttribute('aria-expanded') === 'true',
+    'mobile menu exposes its expanded state',
+  )
+  await page.getByRole('button', { name: 'Upload', exact: true }).last().click()
+  check(
+    !(await page.getByRole('navigation', { name: 'Mobile navigation' }).count()),
+    'selecting a link closes the mobile menu',
+  )
+  check(await page.getByText('Upload logs').isVisible(), 'mobile link navigates to the selected view')
 } finally {
   await browser.close()
 }
