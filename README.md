@@ -191,6 +191,11 @@ headline metrics. These numbers are not production-quality guarantees.
   intentionally reported as missed rather than inferred from message text.
 - Correlation and scoring are deterministic heuristics, not calibrated models.
 - The optional NLP experiment is advisory and does not feed alerts or scores.
+  Its model/runtime dependencies are excluded from the minimal install. To
+  enable `/classify`, install the optional extra from `backend/` with
+  `uv pip install --python .venv/bin/python -e '.[nlp]'`; first use may
+  download the model. If dependencies or model access are unavailable, the
+  endpoint returns `available=false` without affecting triage.
 - Log quality, event completeness, clock accuracy, asset inventory, and
   identities are not independently verified.
 - LLM output can be unavailable or rejected; fallback reports are simpler.

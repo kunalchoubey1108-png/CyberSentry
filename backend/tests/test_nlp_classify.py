@@ -45,9 +45,11 @@ class TestClassifyMessages:
     def test_categories_and_confidences_are_well_formed(self) -> None:
         predictions = classify_messages(MESSAGES)
         assert len(predictions) == len(MESSAGES)
+        if predictions[0].category is None:
+            assert all(prediction.category is None for prediction in predictions)
+            assert all(prediction.reason for prediction in predictions)
+            return
         for prediction in predictions:
-            if prediction.category is None:
-                pytest.fail(f"classifier unavailable: {prediction.reason}")
             assert prediction.category in CLASSES
             assert prediction.confidence is not None
             assert 0.0 <= prediction.confidence <= 1.0
@@ -82,10 +84,14 @@ class TestClassifyEndpoint:
         response = client.post("/classify", json={"messages": MESSAGES})
         assert response.status_code == 200
         body = response.json()
-        assert body["available"] is True
-        assert body["model"]
         assert body["classes"] == list(CLASSES)
         assert len(body["predictions"]) == len(MESSAGES)
+        if not body["available"]:
+            assert body["model"] is None
+            assert body["reason"]
+            assert all(prediction["category"] is None for prediction in body["predictions"])
+            return
+        assert body["model"]
         for prediction in body["predictions"]:
             assert prediction["category"] in CLASSES
             assert 0.0 <= prediction["confidence"] <= 1.0
