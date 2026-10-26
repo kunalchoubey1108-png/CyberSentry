@@ -14,7 +14,9 @@ Every raw model reply passes five checks before it can be shown
    hypothesis) is rejected: only the deterministic stages and the
    analyst may conclude anything. ``alternative_explanations`` is the
    sanctioned place for benign readings, so verdict language there is
-   not a rejection.
+   not a rejection. A reply whose recommended checks carry a runnable
+   command, or that introduces a URL absent from the evidence, is
+   rejected the same way (no "run this" from a poisoned log).
 4. **Citations** — every cited ``evidence_id`` must exist in the
    incident's timeline. Claims citing unknown IDs are removed and the
    removal recorded; an observed fact with *no* citations is
@@ -34,6 +36,7 @@ model output is discarded when unverifiable; the pipeline never breaks).
 
 from __future__ import annotations
 
+import json
 import re
 from collections.abc import Callable, Iterator, Mapping
 from dataclasses import dataclass
@@ -50,6 +53,7 @@ MAX_VALIDATION_RETRIES = 1
 CODE_SCHEMA = "schema_error"
 CODE_SCORE_TAMPER = "score_tamper"
 CODE_SAFE_VERDICT = "safe_verdict"
+CODE_UNSAFE_ACTION = "unsafe_action"
 CODE_UNKNOWN_EVIDENCE = "unknown_evidence_id"
 CODE_UNCITED_FACT = "uncited_fact"
 CODE_NO_GROUNDED_CLAIMS = "no_grounded_claims"
@@ -117,6 +121,23 @@ _SAFE_VERDICT_RE = re.compile(
 )
 
 
+# Runnable commands in a recommended check: code spans, pipes into a
+# shell, or download/exec tools. A poisoned log must not be able to put
+# "run this" in front of the analyst (AGENTS.md rule 4).
+_COMMAND_RE = re.compile(
+    r"`|\|\s*(?:ba|z)?sh\b"
+    r"|\b(?:curl|wget|powershell|iex|invoke-expression|certutil|sudo|chmod)\b"
+    r"|\brm\s+-\w*[rf]",
+    re.IGNORECASE,
+)
+
+# URLs in any field must appear verbatim in the evidence; the model may
+# not introduce a link of its own.
+# shortcut: scheme-prefixed URLs only, bare domains pass; add a domain
+# regex if demo payloads start using them.
+_URL_RE = re.compile(r"\b(?:https?|ftp)://[^\s\"'<>`)\]]+", re.IGNORECASE)
+
+
 @dataclass(frozen=True)
 class ValidationIssue:
     """One thing the validator rejected, removed, or downgraded."""
@@ -167,6 +188,7 @@ def validate_output(
     incident_id: str,
     known_event_ids: set[str],
     score: int,
+    evidence_text: str = "",
 ) -> tuple[IncidentReport | None, ValidationReport]:
     """Run all five checks over one raw reply.
 
@@ -213,6 +235,12 @@ def validate_output(
             ok=False, issues=(verdict_issue,)
         )
 
+    # 3b. Unsafe actions: commands in recommended checks, or URLs the
+    # evidence does not contain.
+    action_issue = _action_text_issue(report, evidence_text)
+    if action_issue is not None:
+        return _rejected(action_issue.code, action_issue.message)
+
     # 4. Citations: remove claims citing unknown events, downgrade facts
     # citing none. Nothing is repaired or invented.
     report, repairs = _repair_claims(report, known_event_ids)
@@ -256,6 +284,7 @@ def complete_validated(
     incident_id = str(detail["incident_id"])
     known_event_ids = {entry["event_id"] for entry in detail["timeline"]}
     score = int(detail["score"]["score"])
+    evidence_text = json.dumps(detail, default=str, ensure_ascii=False)
 
     attempts = MAX_VALIDATION_RETRIES + 1
     collected: list[ValidationIssue] = []
@@ -266,6 +295,7 @@ def complete_validated(
             incident_id=incident_id,
             known_event_ids=known_event_ids,
             score=score,
+            evidence_text=evidence_text,
         )
         collected.extend(check.issues)
         if report is not None:
@@ -363,6 +393,32 @@ def _verdict_text_issue(report: IncidentReport) -> ValidationIssue | None:
     return None
 
 
+def _action_text_issue(
+    report: IncidentReport, evidence_text: str
+) -> ValidationIssue | None:
+    """Flag runnable commands in checks and URLs absent from the evidence."""
+    for index, text in enumerate(report.recommended_checks):
+        match = _COMMAND_RE.search(text)
+        if match is not None:
+            return ValidationIssue(
+                code=CODE_UNSAFE_ACTION,
+                action=ACTION_REJECTED,
+                message=(
+                    f"recommended_checks[{index}] contains a runnable command: "
+                    f"{match.group(0)!r}; checks are for analyst review only"
+                ),
+            )
+    for where, text in _iter_text(report, include_narrative=True):
+        for url in _URL_RE.findall(text):
+            if url.rstrip(".,;:") not in evidence_text:
+                return ValidationIssue(
+                    code=CODE_UNSAFE_ACTION,
+                    action=ACTION_REJECTED,
+                    message=f"{where} introduces a URL not in the evidence: {url!r}",
+                )
+    return None
+
+
 def _repair_claims(
     report: IncidentReport, known_event_ids: set[str]
 ) -> tuple[IncidentReport, list[ValidationIssue]]:
@@ -450,6 +506,7 @@ __all__ = [
     "CODE_TEMPLATE_FALLBACK",
     "CODE_UNCITED_FACT",
     "CODE_UNKNOWN_EVIDENCE",
+    "CODE_UNSAFE_ACTION",
     "MAX_VALIDATION_RETRIES",
     "ValidationIssue",
     "ValidationReport",

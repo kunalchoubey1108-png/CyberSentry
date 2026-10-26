@@ -241,6 +241,11 @@ def generate_report(detail: Mapping[str, Any]) -> IncidentReport:
 
 def _generate_report(detail: Mapping[str, Any]) -> IncidentReport:
     """Try the LLM, fall back to the template — without review notices."""
+    # Fail closed on trust: evidence carrying injection-like text never
+    # reaches the model; the analyst gets the rules-only report instead.
+    flags, _notices = promptshield.scan_detail(detail)
+    if flags:
+        return build_fallback_report(detail)
     try:
         config = LLMConfig.from_env()
         if not config.is_configured:

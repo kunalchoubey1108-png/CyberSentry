@@ -67,8 +67,8 @@ otherwise — reports never change detections, incidents, or scores).
 | grounding_rate | 1.0000 | rate (0-1) |
 | claims | 16 |  |
 | passing_validation | 5 |  |
-| latency_mean_ms | 0.0300 |  |
-| latency_max_ms | 0.0530 |  |
+| latency_mean_ms | 0.0240 |  |
+| latency_max_ms | 0.0550 |  |
 
 ## Full pipeline report path
 
@@ -79,8 +79,8 @@ otherwise — reports never change detections, incidents, or scores).
 | grounding_rate | 1.0000 | rate (0-1) |
 | claims | 16 |  |
 | passing_validation | 5 |  |
-| latency_mean_ms | 0.2270 |  |
-| latency_max_ms | 0.4900 |  |
+| latency_mean_ms | 0.6760 |  |
+| latency_max_ms | 1.4160 |  |
 
 ## Prompt-injection robustness (adversarial set)
 
@@ -99,12 +99,12 @@ otherwise — reports never change detections, incidents, or scores).
 
 | metric | value | detail |
 |---|---|---|
-| pipeline_mean_ms | 4.9610 |  |
-| pipeline_max_ms | 5.7840 |  |
-| baseline_report_mean_ms | 0.0300 |  |
-| baseline_report_max_ms | 0.0530 |  |
-| full_report_mean_ms | 0.2270 |  |
-| full_report_max_ms | 0.4900 |  |
+| pipeline_mean_ms | 4.0280 |  |
+| pipeline_max_ms | 5.5660 |  |
+| baseline_report_mean_ms | 0.0240 |  |
+| baseline_report_max_ms | 0.0550 |  |
+| full_report_mean_ms | 0.6760 |  |
+| full_report_max_ms | 1.4160 |  |
 
 ## Scenario results
 

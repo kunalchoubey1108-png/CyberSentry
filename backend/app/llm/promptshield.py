@@ -28,6 +28,7 @@ places:
 from __future__ import annotations
 
 import re
+import unicodedata
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import asdict, dataclass
 from typing import Any
@@ -49,12 +50,12 @@ INJECTION_FLAG = "injection_flag"
 # quarantined in ``untrusted_text`` by the evidence bundle).
 UNTRUSTED_FIELDS = ("untrusted_text", "message", "user", "host")
 
-# C0 controls except tab/newline, DEL + C1, zero-width chars, and
-# bidirectional overrides — stripped everywhere untrusted text flows.
-_CONTROL_CHARS_RE = re.compile(
-    "[\x00-\x08\x0b-\x1f\x7f-\x9f"
-    "\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]"
-)
+# Stripped by Unicode category, not a hand-kept list: controls (Cc),
+# format chars (Cf: zero-width, bidi, soft hyphen, word joiner, and the
+# invisible U+E0000 "tag" block used to smuggle text to models), private
+# use, surrogates, and line/paragraph separators. Tab and newline survive.
+_STRIP_CATEGORIES = frozenset({"Cc", "Cf", "Co", "Cs", "Zl", "Zp"})
+_KEEP_CHARS = frozenset("\t\n")
 
 # Any run of the fence's angle-bracket delimiters inside a payload.
 _FENCE_IMITATION_RE = re.compile(r"<<<|>>>")
@@ -141,7 +142,11 @@ def strip_control_chars(text: str) -> str:
     attacker could use to hide text from the detector or spoof the
     terminal is dropped.
     """
-    return _CONTROL_CHARS_RE.sub("", text)
+    return "".join(
+        char
+        for char in text
+        if char in _KEEP_CHARS or unicodedata.category(char) not in _STRIP_CATEGORIES
+    )
 
 
 def sanitize_text(value: str, *, max_length: int = MAX_FIELD_LENGTH) -> str:

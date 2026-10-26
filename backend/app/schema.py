@@ -20,6 +20,7 @@ Documented normalizations (the only allowed mutations of ingested data):
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from enum import Enum
 from ipaddress import IPv4Address, IPv6Address, ip_address
@@ -29,6 +30,8 @@ from uuid import uuid4
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 MAX_MESSAGE_LENGTH = 1000
+# Event IDs are cited by the model and shown verbatim: no free text in them.
+_EVENT_ID_RE = re.compile(r"[A-Za-z0-9._:-]{1,128}")
 MIN_SEVERITY = 0
 MAX_SEVERITY = 10
 DEFAULT_SEVERITY = 3
@@ -102,6 +105,10 @@ class Event(BaseModel):
     def _validate_event_id(cls, value: Any) -> str:
         if not isinstance(value, str) or not value.strip():
             raise ValueError(f"event_id must be a non-empty string, got {value!r}")
+        if not _EVENT_ID_RE.fullmatch(value.strip()):
+            raise ValueError(
+                "event_id must be 1-128 chars of letters, digits, '.', '_', ':', '-'"
+            )
         return value.strip()
 
     @field_validator("timestamp", mode="before")

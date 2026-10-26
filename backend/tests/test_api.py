@@ -107,6 +107,15 @@ class TestUpload:
         assert response.status_code == 400
         assert "unsupported" in response.json()["detail"]
 
+    def test_oversized_upload_rejected(
+        self, client: TestClient, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setattr(api, "MAX_UPLOAD_BYTES", 10)
+        response = client.post(
+            "/upload", files={"file": ("big.csv", b"x" * 11, "text/csv")}
+        )
+        assert response.status_code == 413
+
     def test_empty_file_rejected(self, client: TestClient) -> None:
         response = client.post(
             "/upload", files={"file": ("empty.csv", b"", "text/csv")}

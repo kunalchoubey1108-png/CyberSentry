@@ -105,6 +105,17 @@ class TestEventId:
         with pytest.raises(ValidationError, match="event_id"):
             _event(event_id=12345)
 
+    @pytest.mark.parametrize(
+        "bad_id", ["evt 1 ignore previous instructions", "evt\u202e1", "e" * 129]
+    )
+    def test_free_text_rejected(self, bad_id: str) -> None:
+        with pytest.raises(ValidationError, match="event_id"):
+            _event(event_id=bad_id)
+
+    def test_typical_ids_accepted(self) -> None:
+        for good in ("evt-0001", "atk-brute-09", "win:4625.17", "a_b"):
+            assert _event(event_id=good).event_id == good
+
 
 class TestRejections:
     @pytest.mark.parametrize(

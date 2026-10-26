@@ -42,6 +42,8 @@ DEV_ORIGINS = [
 ]
 
 SUPPORTED_SUFFIXES = frozenset({".csv", ".json", ".jsonl", ".ndjson"})
+# Read at most this much of an upload, so one huge file cannot exhaust memory.
+MAX_UPLOAD_BYTES = 10_000_000
 
 # Synthetic sample log files (data/, AGENTS.md rule 7) served so the
 # frontend's "use sample dataset" button can upload one without
@@ -146,7 +148,12 @@ def upload(
             ),
         )
 
-    payload = file.file.read()
+    payload = file.file.read(MAX_UPLOAD_BYTES + 1)
+    if len(payload) > MAX_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"log file exceeds the {MAX_UPLOAD_BYTES // 1_000_000} MB upload limit",
+        )
     with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as handle:
         handle.write(payload)
         temp_path = Path(handle.name)

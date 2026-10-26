@@ -304,6 +304,7 @@ def evaluate() -> dict[str, Any]:
                 incident_id=detail["incident_id"],
                 known_event_ids=known,
                 score=int(detail["score"]["score"]),
+                evidence_text=json.dumps(detail, default=str, ensure_ascii=False),
             )
             if check[0] is not None:
                 grounding[path_name]["valid"] += 1
