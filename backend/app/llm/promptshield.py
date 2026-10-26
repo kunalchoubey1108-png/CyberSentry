@@ -57,6 +57,37 @@ UNTRUSTED_FIELDS = ("untrusted_text", "message", "user", "host")
 _STRIP_CATEGORIES = frozenset({"Cc", "Cf", "Co", "Cs", "Zl", "Zp"})
 _KEEP_CHARS = frozenset("\t\n")
 
+# Cyrillic/Greek letters that render like Latin ones, folded to Latin
+# before phrase matching.
+# shortcut: common look-alikes only, not the full Unicode confusables
+# table; mixed-script words are flagged separately as a backstop.
+_CONFUSABLES = str.maketrans(
+    {
+        # Cyrillic lowercase: a e o p c y x i j s d h l q w
+        "а": "a", "е": "e", "о": "o", "р": "p",
+        "с": "c", "у": "y", "х": "x", "і": "i",
+        "ј": "j", "ѕ": "s", "ԁ": "d", "һ": "h",
+        "ӏ": "l", "ԛ": "q", "ԝ": "w",
+        # Cyrillic uppercase: A B E K M H O P C T X I J S
+        "А": "A", "В": "B", "Е": "E", "К": "K",
+        "М": "M", "Н": "H", "О": "O", "Р": "P",
+        "С": "C", "Т": "T", "Х": "X", "І": "I",
+        "Ј": "J", "Ѕ": "S",
+        # Greek: a e i k v o p t u x, A B E I K M N O P T X Y Z H
+        "α": "a", "ε": "e", "ι": "i", "κ": "k",
+        "ν": "v", "ο": "o", "ρ": "p", "τ": "t",
+        "υ": "u", "χ": "x", "Α": "A", "Β": "B",
+        "Ε": "E", "Ι": "I", "Κ": "K", "Μ": "M",
+        "Ν": "N", "Ο": "O", "Ρ": "P", "Τ": "T",
+        "Χ": "X", "Υ": "Y", "Ζ": "Z", "Η": "H",
+    }
+)
+
+# A Latin letter directly next to a Cyrillic/Greek one: a disguised word.
+_MIXED_SCRIPT_RE = re.compile(
+    r"[A-Za-z][Ͱ-ϿЀ-ԯ]|[Ͱ-ϿЀ-ԯ][A-Za-z]"
+)
+
 # Any run of the fence's angle-bracket delimiters inside a payload.
 _FENCE_IMITATION_RE = re.compile(r"<<<|>>>")
 
@@ -231,11 +262,28 @@ def detect_injection(text: str) -> tuple[str, ...]:
     (AGENTS.md rule 1). The text is normalized first, so control or
     zero-width characters cannot hide a phrase from the match.
     """
-    normalized = strip_control_chars(text)
-    return tuple(
+    normalized = fold_text(text)
+    labels = [
         label
         for label, pattern in INJECTION_PATTERNS
         if pattern.search(normalized)
+    ]
+    # Checked before folding: a word mixing Latin with Cyrillic/Greek
+    # letters is a homoglyph disguise even when no phrase matches.
+    if _MIXED_SCRIPT_RE.search(unicodedata.normalize("NFKC", text)):
+        labels.append("mixed_script")
+    return tuple(labels)
+
+
+def fold_text(text: str) -> str:
+    """Normalize text for phrase matching (never for display or prompts).
+
+    Strips invisible characters, applies NFKC (fullwidth ``ｉｇｎｏｒｅ``
+    -> ``ignore``), and maps common Cyrillic/Greek look-alikes to Latin,
+    so a disguised phrase matches the same pattern as the plain one.
+    """
+    return unicodedata.normalize("NFKC", strip_control_chars(text)).translate(
+        _CONFUSABLES
     )
 
 
@@ -303,6 +351,7 @@ __all__ = [
     "InjectionFlag",
     "build_messages",
     "detect_injection",
+    "fold_text",
     "fence_untrusted",
     "new_nonce",
     "review_notices",

@@ -329,6 +329,33 @@ def _codes(check: validate.ValidationReport) -> list[str]:
 
 class TestValidateOutput:
     @pytest.mark.parametrize(
+        "summary",
+        [
+            "This activity is likely benign maintenance.",
+            "The logins look harmless.",
+            "The sign-ins appear to be legitimate.",
+            "Activity is consistent with an authorized penetration test.",
+            "No further action is needed.",
+            "This is not malicious.",
+            "The sequence poses no risk.",
+            "This activity is likely b\u0435nign.",               # Cyrillic e
+        ],
+    )
+    def test_hedged_safe_verdict_rejected(self, summary: str) -> None:
+        report, result = _validate_raw(valid_payload(summary=summary))
+        assert report is None
+        assert validate.CODE_SAFE_VERDICT in _codes(result)
+
+    def test_benign_reading_allowed_in_alternative_explanations(self) -> None:
+        payload = valid_payload(
+            alternative_explanations=[
+                "This may be an authorized penetration test and harmless."
+            ]
+        )
+        report, _ = _validate_raw(payload)
+        assert report is not None
+
+    @pytest.mark.parametrize(
         "check",
         [
             "Run `whoami` on ws-01 to confirm",

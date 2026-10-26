@@ -43,7 +43,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..schema import Hypothesis, IncidentReport, ObservedFact, ReportConfidence
-from . import prompts
+from . import prompts, promptshield
 from .fallback import build_fallback_report
 
 # One retry: at most two replies are validated before falling back.
@@ -108,8 +108,20 @@ _SCORE_VALUE_RE = re.compile(
 # (summary, observed facts, hypotheses); narrative fields may argue a
 # benign reading as one possibility among others.
 _SAFE_VERDICT_RE = re.compile(
-    r"\b(?:is|are|was|were|remains?|stays?)\s+(?:apparently\s+|clearly\s+|"
-    r"entirely\s+|fully\s+|completely\s+)?(?:safe|benign)\b"
+    # "is benign", "is most likely harmless", "appears to be legitimate"
+    r"\b(?:is|are|was|were|remains?|stays?|appears?|appeared|seems?|seemed|"
+    r"looks?|looked)\s+(?:to\s+be\s+)?(?:(?:most|very|\w+ly)\s+){0,2}"
+    r"(?:safe|benign|harmless|innocuous|non-?malicious|legitimate)\b"
+    # "consistent with an authorized penetration test"
+    r"|\b(?:authori[sz]ed|sanctioned|scheduled|approved|planned)\s+"
+    r"(?:penetration\s+test|pen-?test|red[\s-]?team|security\s+(?:test|"
+    r"assessment|exercise)|vulnerability\s+scan|maintenance|exercise)"
+    r"|\bno\s+(?:further\s+)?(?:action|review|investigation|follow[\s-]?up|"
+    r"escalation|response)\s+(?:is\s+)?(?:needed|required|necessary|warranted)\b"
+    r"|\bnot\s+(?:malicious|suspicious|a\s+(?:threat|concern)|an?\s+(?:attack|"
+    r"incident|security\s+(?:issue|incident)))\b"
+    r"|\bposes?\s+no\s+(?:risk|threat)\b"
+    r"|\bnothing\s+(?:to\s+worry|suspicious|malicious|of\s+concern)\b"
     r"|\bno\s+(?:signs?|indicators?|evidence)\s+of\s+(?:compromise|attack|"
     r"intrusion|malicious\s+activity)\b"
     r"|\b(?:not\s+compromised|no\s+compromise|no\s+breach)\b"
@@ -379,7 +391,8 @@ def _score_text_issue(report: IncidentReport, score: int) -> ValidationIssue | N
 def _verdict_text_issue(report: IncidentReport) -> ValidationIssue | None:
     """Flag output that declares the incident safe or benign."""
     for where, text in _iter_text(report, include_narrative=False):
-        match = _SAFE_VERDICT_RE.search(text)
+        # Folded so look-alike letters cannot dodge the patterns.
+        match = _SAFE_VERDICT_RE.search(promptshield.fold_text(text))
         if match is not None:
             return ValidationIssue(
                 code=CODE_SAFE_VERDICT,
