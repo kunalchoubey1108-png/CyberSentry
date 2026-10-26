@@ -8,6 +8,7 @@
 import claimsCsv from '../../../eval/results/claims_sample.csv?raw'
 import failuresCsv from '../../../eval/results/failures.csv?raw'
 import resultsCsv from '../../../eval/results/results.csv?raw'
+import { PageHeader, Panel } from '../ui.jsx'
 
 // Minimal CSV parser (handles quoted fields with commas/newlines).
 function parseCsv(text) {
@@ -101,40 +102,31 @@ function Stat({ section, metric, text }) {
   const row = findMetric(section, metric)
   if (!row) return null
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-4 py-3">
-      <div className="text-xl font-semibold text-slate-100">
-        {formatValue(row.metric, row.value)}
-      </div>
-      <div className="text-xs uppercase tracking-wide text-slate-500">{text}</div>
+    <div className="panel px-4 py-3">
+      <div className="glow text-xl font-bold text-neon">{formatValue(row.metric, row.value)}</div>
+      <div className="mt-0.5 text-[11px] uppercase tracking-wider text-mute">{text}</div>
     </div>
   )
 }
 
 function labelTone(detail) {
-  if (detail.includes('label=suspicious')) return 'border-red-500/40 text-red-300'
-  if (detail.includes('label=mixed')) return 'border-amber-500/40 text-amber-300'
-  return 'border-slate-500/40 text-slate-300'
+  if (detail.includes('label=suspicious')) return 'text-crit'
+  if (detail.includes('label=mixed')) return 'text-med'
+  return 'text-mute'
 }
 
 export default function EvaluationView() {
   return (
-    <section>
-      <div className="flex items-baseline gap-3">
-        <h2 className="text-xl font-semibold text-slate-100">Evaluation</h2>
-        <span className="text-xs text-slate-500">
-          reads eval/results/*.csv · regenerate with <code>make eval</code> · synthetic
-          labelled fixtures only
-        </span>
-      </div>
-      <p className="mt-1 max-w-3xl text-sm text-slate-400">
-        Deterministic rules-only <strong>baseline</strong> (template report) vs the{' '}
-        <strong>full pipeline</strong> report path, scored against the labels in{' '}
-        <code className="mx-1">data/labelled/labels.json</code>. Every number is parsed
-        from the evaluator output — nothing on this page is hardcoded.
-      </p>
+    <>
+      <PageHeader command="make eval && cat eval/results/*.csv" title="Evaluation">
+        Deterministic rules-only <span className="text-fg">baseline</span> (template report) vs the{' '}
+        <span className="text-fg">full pipeline</span> report path, scored against the labels in{' '}
+        <code className="text-cyan">data/labelled/labels.json</code>. Every number is parsed from the evaluator
+        output, nothing here is hardcoded. Synthetic labelled fixtures only.
+      </PageHeader>
 
       {/* Headline metrics, all parsed from results.csv */}
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
         <Stat section="incident" metric="precision" text="Incident precision" />
         <Stat section="incident" metric="recall" text="Incident recall" />
         <Stat section="incident" metric="f1" text="F1" />
@@ -144,65 +136,52 @@ export default function EvaluationView() {
         <Stat section="injection" metric="flag_coverage" text="Injection flag coverage" />
       </div>
 
-      {/* Full metric table (section, metric, value, detail) */}
-      <div className="mt-4 overflow-x-auto rounded-xl border border-slate-800">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-slate-900/80 text-xs uppercase tracking-wide text-slate-500">
-            <tr>
-              <th className="px-4 py-2.5">Section</th>
-              <th className="px-4 py-2.5">Metric</th>
-              <th className="px-4 py-2.5 text-right">Value</th>
-              <th className="px-4 py-2.5">Detail</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-800/70">
-            {otherRows.map((row) => (
-              <tr key={`${row.section}.${row.metric}`} className="bg-slate-950/40">
-                <td className="px-4 py-1.5 text-xs text-slate-500">{row.section}</td>
-                <td className="px-4 py-1.5 font-mono text-xs text-slate-300">
-                  {row.metric}
-                </td>
-                <td className="px-4 py-1.5 text-right text-slate-200">
-                  {formatValue(row.metric, row.value)}
-                </td>
-                <td className="px-4 py-1.5 text-xs text-slate-500">{row.detail}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Scenario results */}
-      <section className="mt-6">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
-          Scenario results
-        </h3>
-        <div className="mt-2 overflow-x-auto rounded-xl border border-slate-800">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-900/80 text-xs uppercase tracking-wide text-slate-500">
+      <Panel title="metrics" meta={`${otherRows.length} rows`} className="mt-6">
+        <div className="-mx-4 -my-3 overflow-x-auto">
+          <table className="term-table">
+            <thead>
               <tr>
-                <th className="px-4 py-2.5">Scenario</th>
-                <th className="px-4 py-2.5 text-right">Matched</th>
-                <th className="px-4 py-2.5">Detail</th>
+                <th>Section</th>
+                <th>Metric</th>
+                <th className="text-right">Value</th>
+                <th>Detail</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/70">
+            <tbody>
+              {otherRows.map((row) => (
+                <tr key={`${row.section}.${row.metric}`}>
+                  <td className="text-mute">{row.section}</td>
+                  <td className="text-fg">{row.metric}</td>
+                  <td className="whitespace-nowrap text-right text-neon">{formatValue(row.metric, row.value)}</td>
+                  <td className="text-mute">{row.detail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Panel>
+
+      <Panel title="scenario.results" meta={`${scenarioRows.length} scenarios`} className="mt-6">
+        <div className="-mx-4 -my-3 overflow-x-auto">
+          <table className="term-table">
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th className="text-right">Matched</th>
+                <th>Detail</th>
+              </tr>
+            </thead>
+            <tbody>
               {scenarioRows.map((row) => {
                 const parts = row.detail.split(';')
                 const description = parts.slice(2).join(';').replace(/^ */, '')
                 return (
-                  <tr key={row.metric} className="bg-slate-950/40">
-                    <td className="px-4 py-2 font-mono text-xs text-slate-200">
-                      {row.metric}
-                    </td>
-                    <td className="px-4 py-2 text-right text-slate-300">
-                      {formatValue(row.metric, row.value)}
-                    </td>
-                    <td className="px-4 py-2 text-xs text-slate-500">
-                      <span
-                        className={`mr-2 rounded border px-1.5 py-0.5 ${labelTone(row.detail)}`}
-                      >
-                        {(parts[0] || '').replace('label=', '')}
+                  <tr key={row.metric}>
+                    <td className="text-fg">{row.metric}</td>
+                    <td className="text-right text-neon">{formatValue(row.metric, row.value)}</td>
+                    <td className="text-mute">
+                      <span className={`tag mr-2 ${labelTone(row.detail)}`}>
+                        {(parts[0] || '').replace('label=', '').toUpperCase()}
                       </span>
                       {description}
                     </td>
@@ -212,94 +191,65 @@ export default function EvaluationView() {
             </tbody>
           </table>
         </div>
-      </section>
+      </Panel>
 
-      {/* Failure cases */}
-      <section className="mt-6">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
-          Failure cases <span className="text-slate-600">({failures.length})</span>
-        </h3>
+      <Panel title="failure.cases" meta={failures.length} className="mt-6">
         {failures.length === 0 ? (
-          <p className="mt-2 text-sm text-slate-500">None detected.</p>
+          <p className="text-sm text-neon">[ OK ] none detected</p>
         ) : (
-          <div className="mt-2 overflow-x-auto rounded-xl border border-slate-800">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-slate-900/80 text-xs uppercase tracking-wide text-slate-500">
+          <div className="-mx-4 -my-3 overflow-x-auto">
+            <table className="term-table">
+              <thead>
                 <tr>
-                  <th className="px-4 py-2.5">Kind</th>
-                  <th className="px-4 py-2.5">Ref</th>
-                  <th className="px-4 py-2.5">Detail</th>
+                  <th>Kind</th>
+                  <th>Ref</th>
+                  <th>Detail</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/70">
+              <tbody>
                 {failures.map((failure, index) => (
-                  <tr
-                    key={`${failure.kind}-${failure.ref}-${index}`}
-                    className="bg-slate-950/40"
-                  >
-                    <td className="whitespace-nowrap px-4 py-2 text-xs text-amber-300">
-                      {failure.kind}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-300">
-                      {failure.ref}
-                    </td>
-                    <td className="px-4 py-2 text-xs text-slate-500">{failure.detail}</td>
+                  <tr key={`${failure.kind}-${failure.ref}-${index}`}>
+                    <td className="whitespace-nowrap text-med">{failure.kind}</td>
+                    <td className="whitespace-nowrap text-cyan">{failure.ref}</td>
+                    <td className="text-mute">{failure.detail}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         )}
-      </section>
+      </Panel>
 
-      {/* Claims sample for manual review */}
-      <section className="mt-6">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
-          Claims sample for manual review{' '}
-          <span className="text-slate-600">({claims.length} rows)</span>
-        </h3>
-        <div className="mt-2 overflow-x-auto rounded-xl border border-slate-800">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-900/80 text-xs uppercase tracking-wide text-slate-500">
+      <Panel title="claims.sample" meta={`${claims.length} rows for manual review`} className="mt-6">
+        <div className="-mx-4 -my-3 overflow-x-auto">
+          <table className="term-table">
+            <thead>
               <tr>
-                <th className="px-4 py-2.5">Path</th>
-                <th className="px-4 py-2.5">Incident</th>
-                <th className="px-4 py-2.5">Kind</th>
-                <th className="px-4 py-2.5">Claim</th>
-                <th className="px-4 py-2.5">Evidence IDs</th>
-                <th className="px-4 py-2.5 text-right">Exist/cited</th>
-                <th className="px-4 py-2.5 text-right">Grounded</th>
+                <th>Path</th>
+                <th>Incident</th>
+                <th>Kind</th>
+                <th>Claim</th>
+                <th>Evidence IDs</th>
+                <th className="text-right">Exist/cited</th>
+                <th className="text-right">Grounded</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/70">
+            <tbody>
               {claims.map((claim, index) => (
-                <tr
-                  key={`${claim.path}-${claim.incident_id}-${index}`}
-                  className="bg-slate-950/40"
-                >
-                  <td className="px-4 py-2 text-xs text-slate-400">{claim.path}</td>
-                  <td className="px-4 py-2 font-mono text-xs text-slate-500">
-                    {claim.incident_id}
-                  </td>
-                  <td className="px-4 py-2 text-xs text-slate-400">{claim.kind}</td>
-                  <td className="max-w-md truncate px-4 py-2 text-xs text-slate-300">
+                <tr key={`${claim.path}-${claim.incident_id}-${index}`}>
+                  <td className="text-mute">{claim.path}</td>
+                  <td className="text-faint">{claim.incident_id}</td>
+                  <td className="text-mute">{claim.kind}</td>
+                  <td className="max-w-md truncate text-fg" title={claim.claim}>
                     {claim.claim}
                   </td>
-                  <td className="px-4 py-2 font-mono text-xs text-sky-400">
-                    {claim.evidence_ids.split(';').join(', ')}
-                  </td>
-                  <td className="px-4 py-2 text-right font-mono text-xs text-slate-400">
+                  <td className="text-cyan">{claim.evidence_ids.split(';').join(', ')}</td>
+                  <td className="text-right text-mute">
                     {claim.existing}/{claim.cited}
                   </td>
-                  <td className="px-4 py-2 text-right">
-                    <span
-                      className={`rounded px-1.5 py-0.5 text-xs ${
-                        claim.grounded === '1'
-                          ? 'bg-emerald-500/15 text-emerald-300'
-                          : 'bg-red-500/15 text-red-300'
-                      }`}
-                    >
-                      {claim.grounded === '1' ? 'yes' : 'NO'}
+                  <td className="text-right">
+                    <span className={`tag ${claim.grounded === '1' ? 'text-neon' : 'text-crit'}`}>
+                      {claim.grounded === '1' ? 'YES' : 'NO'}
                     </span>
                   </td>
                 </tr>
@@ -307,7 +257,7 @@ export default function EvaluationView() {
             </tbody>
           </table>
         </div>
-      </section>
-    </section>
+      </Panel>
+    </>
   )
 }

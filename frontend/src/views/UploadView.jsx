@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import { uploadFile, fetchSample } from '../api.js'
+import { PageHeader, Panel } from '../ui.jsx'
 
-function Count({ label, value, tone }) {
-  const tones = {
-    slate: 'text-slate-100',
-    red: 'text-red-400',
-    amber: 'text-amber-400',
-  }
+const PIPELINE = ['logs', 'validate', 'detect', 'correlate', 'score', 'evidence', 'report']
+
+function LogLine({ status, tone, children }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-4 py-3">
-      <div className={`text-2xl font-semibold ${tones[tone]}`}>{value}</div>
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-    </div>
+    <li className="flex gap-3">
+      <span className={`w-14 shrink-0 ${tone}`}>[{status}]</span>
+      <span className="text-fg">{children}</span>
+    </li>
   )
 }
 
@@ -20,6 +18,7 @@ export default function UploadView({ onUploaded, onGoToIncidents }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [counts, setCounts] = useState(null)
+  const [dragging, setDragging] = useState(false)
 
   async function submit(produceFile) {
     setBusy(true)
@@ -37,68 +36,104 @@ export default function UploadView({ onUploaded, onGoToIncidents }) {
   }
 
   return (
-    <section className="max-w-2xl">
-      <h2 className="text-xl font-semibold text-slate-100">Upload logs</h2>
-      <p className="mt-1 text-sm text-slate-400">
-        CSV or JSON security logs. Rows are validated, then rules detect, correlate, and
-        score — nothing is blocked or changed.
-      </p>
+    <div className="max-w-3xl">
+      <PageHeader command="cybersentry ingest --file <logs>" title="Ingest security logs">
+        CSV or JSON logs. Rows are validated, then deterministic rules detect, correlate, and score.
+        Nothing is blocked or changed.
+      </PageHeader>
 
-      <div className="mt-4 flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-        <input
-          type="file"
-          accept=".csv,.json,.jsonl,.ndjson"
-          onChange={(event) => setFile(event.target.files?.[0] || null)}
-          className="text-sm text-slate-300 file:mr-3 file:rounded-md file:border-0 file:bg-slate-700 file:px-3 file:py-1.5 file:text-slate-100 hover:file:bg-slate-600"
-        />
-        <div className="flex gap-3">
-          <button
-            type="button"
-            disabled={!file || busy}
-            onClick={() => submit(async () => file)}
-            className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            {busy ? 'Uploading…' : 'Upload'}
+      <ol aria-label="Pipeline" className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+        {PIPELINE.map((step, index) => (
+          <li key={step} className="flex items-center gap-2">
+            <span className={step === 'report' ? 'text-cyan' : 'text-neon'}>{step}</span>
+            {index < PIPELINE.length - 1 && <span aria-hidden="true" className="text-faint">→</span>}
+          </li>
+        ))}
+        <li className="w-full text-faint">{'// the LLM sits only at the end: it explains, never decides'}</li>
+      </ol>
+
+      <Panel title="upload" meta=".csv .json .jsonl .ndjson">
+        <label
+          onDragOver={(event) => {
+            event.preventDefault()
+            setDragging(true)
+          }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={(event) => {
+            event.preventDefault()
+            setDragging(false)
+            setFile(event.dataTransfer.files?.[0] || null)
+          }}
+          className={`flex min-h-32 cursor-pointer flex-col items-center justify-center gap-1 border border-dashed px-4 py-6 text-center transition-colors focus-within:outline-2 focus-within:outline-neon ${
+            dragging ? 'border-neon bg-neon/10' : 'border-line hover:border-mute'
+          }`}
+        >
+          <input
+            type="file"
+            accept=".csv,.json,.jsonl,.ndjson"
+            onChange={(event) => setFile(event.target.files?.[0] || null)}
+            className="sr-only"
+          />
+          {file ? (
+            <>
+              <span className="text-neon">{file.name}</span>
+              <span className="text-xs text-mute">{(file.size / 1024).toFixed(1)} KB · ready</span>
+            </>
+          ) : (
+            <>
+              <span className="text-fg">Drop a log file here</span>
+              <span className="text-xs text-mute">or click to browse</span>
+            </>
+          )}
+        </label>
+
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button type="button" disabled={!file || busy} onClick={() => submit(async () => file)} className="btn">
+            {busy ? 'running…' : '> run pipeline'}
           </button>
           <button
             type="button"
             disabled={busy}
             onClick={() => submit(() => fetchSample('sample_attacks.csv'))}
-            className="rounded-md border border-slate-600 px-4 py-2 text-sm font-medium text-slate-200 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+            className="btn btn-ghost"
           >
-            Use sample dataset
+            use sample dataset
           </button>
         </div>
+
         {error && (
-          <p className="rounded-md border border-red-900/60 bg-red-950/40 px-3 py-2 text-sm text-red-300">
-            {error}
+          <p role="alert" className="mt-4 border border-crit/60 px-3 py-2 text-sm text-crit">
+            [ERR] {error}
           </p>
         )}
-      </div>
+      </Panel>
 
       {counts && (
-        <div className="mt-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <div className="text-sm font-medium text-slate-200">{counts.filename}</div>
-          <div className="mt-3 grid grid-cols-3 gap-3">
-            <Count label="Accepted" value={counts.events} tone="slate" />
-            <Count label="Rejected" value={counts.rejected} tone="amber" />
-            <Count label="Incidents" value={counts.incidents} tone="red" />
-          </div>
+        <Panel title="pipeline output" meta={counts.filename} className="mt-5">
+          <ul className="space-y-1 text-sm" aria-live="polite">
+            <LogLine status=" OK " tone="text-neon">{counts.filename} parsed</LogLine>
+            <LogLine status=" OK " tone="text-neon">{counts.events} events accepted</LogLine>
+            <LogLine status={counts.rejected > 0 ? 'WARN' : ' OK '} tone={counts.rejected > 0 ? 'text-med' : 'text-neon'}>
+              {counts.rejected} rows rejected
+            </LogLine>
+            <LogLine status={counts.incidents > 0 ? 'ALRT' : ' OK '} tone={counts.incidents > 0 ? 'text-crit' : 'text-neon'}>
+              {counts.incidents} incidents correlated
+            </LogLine>
+          </ul>
           {counts.rejected > 0 && (
-            <p className="mt-3 text-xs text-slate-500">
-              Rejected rows failed validation and were kept server-side with a reason —
-              never silently dropped.
+            <p className="mt-3 text-xs text-mute">
+              Rejected rows failed validation and were kept server-side with a reason, never silently dropped.
             </p>
           )}
           <button
             type="button"
             onClick={() => (counts.incidents > 0 ? onGoToIncidents() : onUploaded())}
-            className="mt-3 text-sm text-emerald-400 hover:text-emerald-300 hover:underline"
+            className="btn mt-4"
           >
-            {counts.incidents > 0 ? 'View incidents →' : 'Upload another file'}
+            {counts.incidents > 0 ? '> view incidents' : '> upload another file'}
           </button>
-        </div>
+        </Panel>
       )}
-    </section>
+    </div>
   )
 }
