@@ -12,6 +12,18 @@ evidence only; it does not create alerts or change detections or scores.
 > conclusions as an analyst. The fixtures are synthetic; real-world
 > performance has not been established.
 
+## Screenshots
+
+All screenshots show synthetic demo data in rules-only mode (no LLM key).
+
+| Incidents | Incident detail |
+|---|---|
+| ![Incident list with score meters, risk bands, rules and entities](docs/screenshots/02-incidents.png) | ![Incident 84/100 Critical with injection notice, score breakdown and rule findings](docs/screenshots/03-incident-detail.png) |
+| **Triage report** | **Evaluation** |
+| ![Evidence-cited report: observed facts and hypotheses with event-ID chips, unknowns and next steps](docs/screenshots/04-triage-report.png) | ![Evaluation metrics parsed from eval/results](docs/screenshots/05-evaluation.png) |
+
+![Ingest page with the pipeline strip and drag-and-drop upload](docs/screenshots/01-ingest.png)
+
 ## Quick start
 
 Requirements: Python 3.11, `uv`, Node.js/npm.
