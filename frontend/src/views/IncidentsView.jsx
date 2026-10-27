@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion } from 'motion/react'
 import { getIncidents } from '../api.js'
 import { Meter, PageHeader, StatusLine } from '../ui.jsx'
 import { BAND_TEXT, BandBadge } from './RiskBand.jsx'
@@ -105,9 +106,12 @@ export default function IncidentsView({ onSelect }) {
             </tr>
           </thead>
           <tbody>
-            {sorted.map((incident) => (
-              <tr
+            {sorted.map((incident, index) => (
+              <motion.tr
                 key={incident.incident_id}
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: index * 0.04 }}
                 tabIndex={0}
                 onClick={() => onSelect(incident.incident_id)}
                 onKeyDown={(event) => {
@@ -139,7 +143,7 @@ export default function IncidentsView({ onSelect }) {
                 </td>
                 <td className="text-right text-fg">{incident.event_count}</td>
                 <td className="whitespace-nowrap text-mute">{formatWindow(incident.start_time, incident.end_time)}</td>
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>

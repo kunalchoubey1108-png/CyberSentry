@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { AnimatePresence, MotionConfig, motion } from 'motion/react'
 import { getHealth } from './api.js'
 import EvaluationView from './views/EvaluationView.jsx'
 import IncidentDetailView from './views/IncidentDetailView.jsx'
@@ -36,6 +37,8 @@ function App() {
   const apiReady = health?.status === 'ok'
 
   return (
+    // reducedMotion="user": the OS "reduce motion" setting drops movement, keeps fades.
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen">
       <header className="sticky top-0 z-50 border-b border-line bg-ink/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
@@ -67,14 +70,22 @@ function App() {
                 type="button"
                 onClick={() => setView(item.key)}
                 aria-current={activeKey === item.key ? 'page' : undefined}
-                className={`min-h-10 cursor-pointer px-3 text-[13px] transition-colors ${
-                  activeKey === item.key
-                    ? 'bg-neon font-bold text-ink'
-                    : 'text-mute hover:bg-line hover:text-fg'
+                className={`relative min-h-10 cursor-pointer px-3 text-[13px] transition-colors ${
+                  activeKey === item.key ? 'font-bold text-ink' : 'text-mute hover:bg-line hover:text-fg'
                 }`}
               >
-                <span className={activeKey === item.key ? 'text-ink/70' : 'text-faint'}>{item.index}</span>{' '}
-                {item.label}
+                {activeKey === item.key && (
+                  <motion.span
+                    layoutId="nav-active"
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-neon"
+                    transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                  />
+                )}
+                <span className="relative">
+                  <span className={activeKey === item.key ? 'text-ink/70' : 'text-faint'}>{item.index}</span>{' '}
+                  {item.label}
+                </span>
               </button>
             ))}
           </nav>
@@ -90,20 +101,29 @@ function App() {
       </header>
 
       <main id="top" className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        {view === 'upload' && (
-          <UploadView onUploaded={() => setView('upload')} onGoToIncidents={() => setView('incidents')} />
-        )}
-        {view === 'incidents' && <IncidentsView onSelect={selectIncident} />}
-        {view === 'detail' && (
-          <IncidentDetailView key={selectedId} incidentId={selectedId} onBack={() => setView('incidents')} />
-        )}
-        {view === 'evaluation' && <EvaluationView />}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={view === 'detail' ? `detail-${selectedId}` : view}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+          >
+            {view === 'upload' && (
+              <UploadView onUploaded={() => setView('upload')} onGoToIncidents={() => setView('incidents')} />
+            )}
+            {view === 'incidents' && <IncidentsView onSelect={selectIncident} />}
+            {view === 'detail' && <IncidentDetailView incidentId={selectedId} onBack={() => setView('incidents')} />}
+            {view === 'evaluation' && <EvaluationView />}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <footer className="mx-auto max-w-6xl px-4 pb-8 text-xs text-faint sm:px-6">
         {'// triage copilot · detects, correlates, scores, reports · never blocks or changes anything'}
       </footer>
     </div>
+    </MotionConfig>
   )
 }
 

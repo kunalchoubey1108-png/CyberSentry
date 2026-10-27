@@ -1,15 +1,22 @@
 import { useState } from 'react'
+import { motion } from 'motion/react'
 import { uploadFile, fetchSample } from '../api.js'
 import { PageHeader, Panel } from '../ui.jsx'
 
 const PIPELINE = ['logs', 'validate', 'detect', 'correlate', 'score', 'evidence', 'report']
 
-function LogLine({ status, tone, children }) {
+// Each log line "prints" a beat after the previous one, like terminal output.
+function LogLine({ step, status, tone, children }) {
   return (
-    <li className="flex gap-3">
+    <motion.li
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.12, delay: step * 0.15 }}
+      className="flex gap-3"
+    >
       <span className={`w-14 shrink-0 ${tone}`}>[{status}]</span>
       <span className="text-fg">{children}</span>
-    </li>
+    </motion.li>
   )
 }
 
@@ -111,12 +118,12 @@ export default function UploadView({ onUploaded, onGoToIncidents }) {
       {counts && (
         <Panel title="pipeline output" meta={counts.filename} className="mt-5">
           <ul className="space-y-1 text-sm" aria-live="polite">
-            <LogLine status=" OK " tone="text-neon">{counts.filename} parsed</LogLine>
-            <LogLine status=" OK " tone="text-neon">{counts.events} events accepted</LogLine>
-            <LogLine status={counts.rejected > 0 ? 'WARN' : ' OK '} tone={counts.rejected > 0 ? 'text-med' : 'text-neon'}>
+            <LogLine step={0} status=" OK " tone="text-neon">{counts.filename} parsed</LogLine>
+            <LogLine step={1} status=" OK " tone="text-neon">{counts.events} events accepted</LogLine>
+            <LogLine step={2} status={counts.rejected > 0 ? 'WARN' : ' OK '} tone={counts.rejected > 0 ? 'text-med' : 'text-neon'}>
               {counts.rejected} rows rejected
             </LogLine>
-            <LogLine status={counts.incidents > 0 ? 'ALRT' : ' OK '} tone={counts.incidents > 0 ? 'text-crit' : 'text-neon'}>
+            <LogLine step={3} status={counts.incidents > 0 ? 'ALRT' : ' OK '} tone={counts.incidents > 0 ? 'text-crit' : 'text-neon'}>
               {counts.incidents} incidents correlated
             </LogLine>
           </ul>

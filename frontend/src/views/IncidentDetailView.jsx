@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createReport, getIncident } from '../api.js'
-import { Meter, PageHeader, Panel, StatusLine } from '../ui.jsx'
+import { CountUp, Meter, PageHeader, Panel, StatusLine } from '../ui.jsx'
 import { BAND_TEXT, BandBadge } from './RiskBand.jsx'
 
 // Score component caps (docs/scoring.md): the bars show each named
@@ -153,7 +153,9 @@ export default function IncidentDetailView({ incidentId, onBack }) {
 
       {/* Score, band, mode + injection tags. */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <span className={`glow text-5xl font-bold ${bandText}`}>{detail.score.score}</span>
+        <span className={`glow text-5xl font-bold tabular-nums ${bandText}`} aria-label={`Score ${detail.score.score}`}>
+          <CountUp value={detail.score.score} />
+        </span>
         <div className="flex flex-col gap-1.5">
           <Meter value={detail.score.score} max={100} cells={20} className={bandText} />
           <div className="flex flex-wrap gap-2">
